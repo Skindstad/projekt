@@ -74,7 +74,8 @@ function handleQueryObject(query, res) {
 }
 
 function handleFileObject(query, res) {
-    fs.readFile(query.filepath, function(err, data) {
+    fs.readFile(query.filepath, function (err, data) {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(data)
     })
 }

@@ -7,7 +7,8 @@ rest.dbSetup(       //Must be called if you want to use mysql calls
     "employees"          //Optionally database
 )
 
-rest.page("/", function (q) {
+
+rest.page("/", function () {
     return rest.file("index.html")
 })
 
