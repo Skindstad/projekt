@@ -24,4 +24,27 @@ $(document).ready(function(){
 		e.preventDefault();
 
 	});
+
+	/*insert new employees to the database*/
+	$("#submit").click(function(e){
+		var emp_no = $("input[name='emp_no']").val();
+		var birth = $("input[type='date'][name='birth']").val();
+		var firstname = $("input:text[name='first']").val();
+		var lastname = $("input:text[name='last']").val();
+		var gender = $("input:radio[name='gender']:checked").val();
+		var hire = $("input[type='date'][name='hire']").val();
+			
+		if (emp_no == "" || birth == "dd-mm-åååå" || firstname == "" || lastname == "" || hire == "dd-mm-åååå"){
+			alert("please fill all fields!!!!")
+		} else {
+		
+			var querystring = "INSERT INTO employees(emp_no, birth_date, first_name, last_name, sex, hire_date) VALUES (" ;
+			querystring += emp_no + ", '" + birth + "','" + firstname + "','" + lastname + "','" + gender + "','" + hire + "')";
+			alert(querystring);
+			$("#content_newEmployee").html("/query?query=" + encodeURIComponent(querystring));
+			
+		}
+		
+		e.preventDefault();
+		});
 });
