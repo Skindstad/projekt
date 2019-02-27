@@ -3,25 +3,27 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Employees gruppe opgave, forside</title>
+    <title>Employees group assignment, frontpage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css">
-      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="jquery_devel_v3.3.1.js"></script>
     <script src="main.js"></script>
 </head>
 <body>
     <h1 id="overskrift">Frontpage logo</h1>
     <div id="main">
-	    <ul id="sidebar">
-		    <li class="selected" href="?frontpage">Frontpage</li>
-		    <li href="?newEmployee">Insert new employee</li>
-		    <li href="?newEmployee">Show new employees</li>
-		    <li href="?newEmployee">Show all employees</li>
-		    <li href="?newEmployee">Show oldest employees</li>
-		    <li href="?newEmployee">Show employees grouped by department</li>
-		    <li href="?newEmployee">Show salaries</li>
-	    </ul>
+    	<div id="sidebarHolder">
+		    <ul id="sidebar">
+			    <li class="selected" href="?frontpage">Frontpage</li>
+			    <li href="?newEmployee">Insert new employee</li>
+			    <li href="?frontpage">Show new employees</li>
+			    <li href="?showAllEmployees">Show all employees</li>
+			    <li href="?frontpage">Show oldest employees</li>
+			    <li href="?frontpage">Show employees grouped by department</li>
+			    <li href="?frontpage">Show salaries</li>
+		    </ul>
+		</div>
 
 	    <div id="content">
 	    	<div id="content_frontpage">
@@ -29,17 +31,31 @@
 	    	</div>
 	    	<div id="content_newEmployee">
 	    		Insert new employee<br>
-          <form class="emp" action="" method="post">
-            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="number" name="emp_no" placeholder="Emp number"><br>
-            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="date" name="birth_date" placeholder="birthday" ><br>
-            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="text" name="first" placeholder="Firstname" ><br>
-            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="text" name="last" placeholder="Lastname"><br>
-            <input class="w3-radio" type="radio" name="gender"  value="m" checked> Male<br>
-            <input class="w3-radio" type="radio" name="gender" value="f"> Female<br><br>
-            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="date" name="hire" placeholder="Hire date"><br>
-            <br>
-            <button class="w3-btn w3-ripple" type="submit" name="submit" id="submit">submit</button>
-          </form>
+	          <form class="emp" action="" method="post">
+	            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="number" name="emp_no" placeholder="Emp number"><br>
+	            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="date" name="birth_date" placeholder="birthday" ><br>
+	            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="text" name="first" placeholder="Firstname" ><br>
+	            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="text" name="last" placeholder="Lastname"><br>
+	            <input class="w3-radio" type="radio" name="gender"  value="m" checked> Male<br>
+	            <input class="w3-radio" type="radio" name="gender" value="f"> Female<br><br>
+	            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="date" name="hire" placeholder="Hire date"><br>
+	            <br>
+              <button class="w3-btn w3-ripple" type="submit" name="submit" id="submit">submit</button>
+	          </form>
+			</div>
+			<div id="content_showAllEmployees">
+	    		Show all employees<br>
+	          <form class="emp" action="" method="post">
+	            Table <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_table" value="employees"><br>
+	            Fields <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_fields" value="*"><br>
+	            Fields <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_limit" value=" LIMIT 100"><br>
+
+	            Result: <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query"><br>
+	            <button id="fetch_allEmployeesByFirstName" type="submit">Sort by firstName</button>
+	          </form>
+
+	          <div id="content_showAllEmployees_result">aaa</div>
+	          <div id="content_showAllEmployees_result_source">aaa</div>
 			</div>
 		</div>
 	</div>
