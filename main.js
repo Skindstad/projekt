@@ -5,5 +5,7 @@ $(document).ready(function(){
 
 		$("#content div").css("display", "none");
 		$("#content_" + this.getAttribute("href").substring(1)).css("display", "block");
+
+		$(document).attr("title", $(document).attr("title").split(",")[0] + ", " + this.innerHTML);
 	});
 });
