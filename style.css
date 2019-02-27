@@ -4,8 +4,22 @@
 }
 
 body{
-
+	padding:20px;
 }
+
+#main {
+	display: grid;
+	grid-template-columns: 220px auto;
+}
+
+#sidebar {
+	grid-column: 1;
+}
+
+#content {
+	grid-column: 2;
+}
+
 
 ul {
     background: #aaa;
@@ -20,6 +34,7 @@ li {
     text-align: center;
     background: #ddd;
     border-radius: 5px;
+    list-style-type: none;
 }
 
 li:hover, li.selected {
