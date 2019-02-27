@@ -1,20 +1,28 @@
-var rest = require("./RestEasy.js") //Import the Module
+var rest = require("./RestEasy.js"); //Import the Module
 
 rest.dbSetup(       //Must be called if you want to use mysql calls
     "localhost",    //Host
     "AdminEmp",         //User
     "1234",      //Password
     "employees"          //Optionally database
-)
+);
 
 
 rest.page("/", function () {
-    return rest.file("index.html")
-})
+    return rest.file("index.html");
+});
 
 rest.page("/style.css", function () {
-    return rest.file("style.css")
-})
+    return rest.file("style.css");
+});
+
+rest.page("/main.js", function () {
+    return rest.file("main.js");
+});
+
+rest.page("/jquery_devel_v3.3.1.js", function () {
+    return rest.file("jquery_devel_v3.3.1.js");
+});
 
 rest.start(8001) //Initialize the server
 

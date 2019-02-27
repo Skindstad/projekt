@@ -21,23 +21,24 @@ body{
 }
 
 
-ul {
+ul#sidebar {
     background: #aaa;
     border: #000 solid 3px;
     border-radius: 8px;
     width: 200px;
 }
 
-li {
+ul#sidebar > li {
     margin:3px;
     padding: 3px 0;
     text-align: center;
     background: #ddd;
     border-radius: 5px;
     list-style-type: none;
+    cursor: pointer;
 }
 
-li:hover, li.selected {
+#sidebar > li:hover, #sidebar > li.selected {
 	background: #000;
 	color: #fff;
 }
