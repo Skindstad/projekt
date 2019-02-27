@@ -19,6 +19,9 @@ body{
 
 #content {
 	grid-column: 2;
+	background: #bbb;
+	border-radius: 8px;
+	padding:10px;
 }
 
 

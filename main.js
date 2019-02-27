@@ -42,8 +42,7 @@ $(document).ready(function(){
 		
 			var querystring = "INSERT INTO employees(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES (" ;
 			querystring += emp_no + ", '" + birth + "','" + firstname + "','" + lastname + "','" + gender + "','" + hire + "')";
-			alert(querystring);
-			$("#content_newEmployee").html("/query?query=" + encodeURIComponent(querystring));
+			$("#content_newEmployee").load("/query?query=" + encodeURIComponent(querystring));
 			
 		}
 		
