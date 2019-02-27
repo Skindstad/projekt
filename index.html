@@ -1,28 +1,47 @@
 ﻿<!DOCTYPE html>
 <html lang="da-DK">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Employees gruppe opgave, forside</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="jquery_devel_v3.3.1.js"></script>
     <script src="main.js"></script>
 </head>
 <body>
-    <h1 id="overskrift">Forside</h1>
-    <br>
-    <br>
-    <form class="emp" action="" method="post">
-<input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="number" name="emp_no" placeholder="Emp number"><br>
-<input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="date" name="birth_date" placeholder="birthday" ><br>
-<input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="text" name="first" placeholder="Firstname" ><br>
-<input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="text" name="last" placeholder="Lastname"><br>
-<input class="w3-radio" type="radio" name="gender"  value="m" checked> Male<br>
-<input class="w3-radio" type="radio" name="gender" value="f"> Female<br><br>
-<input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="date" name="hire" placeholder="Hire date"><br>
-<br>
-<button class="w3-btn w3-ripple" type="submit">submit</button>
-    </form>
+    <h1 id="overskrift">Frontpage logo</h1>
+    <div id="main">
+	    <ul id="sidebar">
+		    <li class="selected" href="?frontpage">Frontpage</li>
+		    <li href="?newEmployee">Insert new employee</li>
+		    <li href="?newEmployee">Show new employees</li>
+		    <li href="?newEmployee">Show all employees</li>
+		    <li href="?newEmployee">Show oldest employees</li>
+		    <li href="?newEmployee">Show employees grouped by department</li>
+		    <li href="?newEmployee">Show salaries</li>
+	    </ul>
+
+	    <div id="content">
+	    	<div id="content_frontpage">
+	    		This is the frontpage
+	    	</div>
+	    	<div id="content_newEmployee">
+	    		Insert new employee<br>
+          <form class="emp" action="" method="post">
+            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="number" name="emp_no" placeholder="Emp number"><br>
+            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="date" name="birth_date" placeholder="birthday" ><br>
+            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="text" name="first" placeholder="Firstname" ><br>
+            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="text" name="last" placeholder="Lastname"><br>
+            <input class="w3-radio" type="radio" name="gender"  value="m" checked> Male<br>
+            <input class="w3-radio" type="radio" name="gender" value="f"> Female<br><br>
+            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="date" name="hire" placeholder="Hire date"><br>
+            <br>
+            <button class="w3-btn w3-ripple" type="submit">submit</button>
+          </form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

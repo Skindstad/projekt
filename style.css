@@ -4,6 +4,54 @@
 }
 
 body{
+	padding:20px;
+	background:#aaa;
+}
+
+#main {
+	display: grid;
+	grid-template-columns: 220px auto;
+}
+
+#sidebar {
+	grid-column: 1;
+}
+
+#content {
+	grid-column: 2;
+}
+
+
+ul#sidebar {
+    background: #aaa;
+    border: #000 solid 3px;
+    border-radius: 8px;
+    width: 200px;
+}
+
+ul#sidebar > li {
+    margin:3px;
+    padding: 3px 0;
+    text-align: center;
+    background: #ddd;
+    border-radius: 5px;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+#sidebar > li:hover, #sidebar > li.selected {
+	background: #000;
+	color: #fff;
+}
+
+#content > div {
+	display: none;
+}
+
+#content > #content_frontpage {
+	display:block;
+}
+
 
 }
 form{
