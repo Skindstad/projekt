@@ -40,11 +40,11 @@ rest.start(8001) //Initialize the server
 
 //Declaring a page that returns something from a database
 //Will be accessed on localhost:8001/query
-//rest.page("/query", function () {
-//    return "SELECT * FROM names"    //Since this starts with SELECT, 
+rest.page("/query", function (q) {
+    return q.select;    //Since this starts with SELECT, 
     //the system will try and run it 
     //as a query on the database
-//})
+})
 
 //Declaring a page that uses parameters
 //Will be accessed on localhost:8001/parameters?a=3&b=5

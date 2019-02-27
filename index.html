@@ -17,11 +17,11 @@
 		    <ul id="sidebar">
 			    <li class="selected" href="?frontpage">Frontpage</li>
 			    <li href="?newEmployee">Insert new employee</li>
-			    <li href="?newEmployee">Show new employees</li>
-			    <li href="?newEmployee">Show all employees</li>
-			    <li href="?newEmployee">Show oldest employees</li>
-			    <li href="?newEmployee">Show employees grouped by department</li>
-			    <li href="?newEmployee">Show salaries</li>
+			    <li href="?frontpage">Show new employees</li>
+			    <li href="?showAllEmployees">Show all employees</li>
+			    <li href="?frontpage">Show oldest employees</li>
+			    <li href="?frontpage">Show employees grouped by department</li>
+			    <li href="?frontpage">Show salaries</li>
 		    </ul>
 		</div>
 
@@ -42,6 +42,22 @@
 	            <br>
 	            <button class="w3-btn w3-ripple" type="submit">submit</button>
 	          </form>
+			</div>
+			<div id="content_showAllEmployees">
+	    		Show all employees<br>
+	          <form class="emp" action="" method="post">
+	            Table <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_table" value="employees"><br>
+	            Fields <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_fields" value="*"><br>
+	            Fields <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_limit" value=" LIMIT 100"><br>
+
+	            Result: <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query"><br>
+	            <button id="fetch_allEmployeesByFirstName" type="submit">Sort by firstName</button>
+	          </form>
+
+	          <div id="content_showAllEmployees_result">aaa</div>
+	          <div id="content_showAllEmployees_result_source">aaa</div>
+
+
 			</div>
 		</div>
 	</div>
