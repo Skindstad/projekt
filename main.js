@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+	/* Menu bar - title-, page- and button_background- change */
 	$("#sidebar li").click(function(){
 		$("#sidebar li").attr("class", "");
 		$(this).attr("class", "selected");
@@ -9,6 +11,7 @@ $(document).ready(function(){
 		$(document).attr("title", $(document).attr("title").split(",")[0] + ", " + this.innerHTML);
 	});
 
+	/* Show all employees example with input fields for string manipulation and example view */
 	$("#fetch_allEmployeesByFirstName").click(function(e){
 		$("input[name=showAllEmployees_query]").val("SELECT " +
 			$("input[name=showAllEmployees_query_fields]").val() +
@@ -24,7 +27,7 @@ $(document).ready(function(){
 
 	});
 
-
+	/* Show all departments */
 	$("li[href='?showDepartments']").click(function(e){
 		var query = encodeURIComponent("SELECT * FROM departments");
 		$("#content_departments").load("/query?select=" + query);
