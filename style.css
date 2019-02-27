@@ -6,3 +6,23 @@
 body{
 
 }
+
+ul {
+    background: #aaa;
+    border: #000 solid 3px;
+    border-radius: 8px;
+    width: 200px;
+}
+
+li {
+    margin:3px;
+    padding: 3px 0;
+    text-align: center;
+    background: #ddd;
+    border-radius: 5px;
+}
+
+li:hover {
+	background: #000;
+	color: #fff;
+}
