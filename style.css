@@ -51,3 +51,37 @@ ul#sidebar > li {
 #content > #content_frontpage {
 	display:block;
 }
+
+
+}
+form{
+    width: auto;
+    margin-left: 2%;
+    margin-right: auto;
+    border: black 1px solid;
+    border-radius: 5px;
+}
+.emp{
+    width: 300px;
+}
+input{
+    
+    margin-top: 1%;
+    height: auto;
+    width: auto;
+    font-size: 20px;
+    border-radius: 5px;
+}
+button{
+    display: block!important;
+    height: auto;
+    width: 100px;
+    margin: 0 auto!important;
+    font-size: 20px;
+    border-radius: 2px;
+    background-color: gray;
+}
+button:hover {
+    background-color: black;
+    color: white;
+}
