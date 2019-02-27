@@ -1,4 +1,4 @@
-/* Please import the database employeesDB.sql file prior to running below scripts */
+/* Please import the database files prior to running below scripts */
 
 
 
