@@ -43,3 +43,11 @@ ul#sidebar > li {
 	background: #000;
 	color: #fff;
 }
+
+#content > div {
+	display: none;
+}
+
+#content > #content_frontpage {
+	display:block;
+}
