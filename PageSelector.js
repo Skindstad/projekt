@@ -41,7 +41,11 @@ rest.start(8001) //Initialize the server
 //Declaring a page that returns something from a database
 //Will be accessed on localhost:8001/query
 rest.page("/query", function (q) {
-    return q.select;    //Since this starts with SELECT, 
+    if (q.select)
+        return q.select;
+    else
+        return rest.query(q.query);
+    //Since this starts with SELECT,
     //the system will try and run it 
     //as a query on the database
 })

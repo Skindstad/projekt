@@ -10,7 +10,6 @@ $(document).ready(function(){
 	});
 
 	$("#fetch_allEmployeesByFirstName").click(function(e){
-	//$("li").click(function(e){
 		$("input[name=showAllEmployees_query]").val("SELECT " +
 			$("input[name=showAllEmployees_query_fields]").val() +
 			" FROM " + $("input[name=showAllEmployees_query_table]").val() +
@@ -24,4 +23,14 @@ $(document).ready(function(){
 		e.preventDefault();
 
 	});
+
+
+	$("li[href='?showDepartments']").click(function(e){
+		var query = encodeURIComponent("SELECT * FROM departments");
+		$("#content_departments").load("/query?select=" + query);
+	});
+
+
+				/* TODO : INSERT ... works now.
+	INSERT INTO departments(dept_no, dept_name) VALUES("d999", "Test");*/
 });
