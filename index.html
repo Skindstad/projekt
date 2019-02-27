@@ -9,31 +9,31 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <header>
-        <h1 id="overskrift">Forside logo</h1>
-    </header>
+    <h1 id="overskrift">Forside logo</h1>
+    <div id="main">
+	    <ul id="sidebar">
+		    <li >Forside</li>
+		    <li>Indsæt ny medarbejder</li>
+		    <li>Vis nye ansatte</li>
+		    <li>Vis alle ansatte</li>
+		    <li>Vis ældste ansatte</li>
+		    <li>Vis ansatte fordelt på afd.</li>
+		    <li>Vis lønninger</li>
+	    </ul>
 
-    <ul>
-	    <li>Forside</li>
-	    <li>Indsæt ny medarbejder</li>
-	    <li>Vis nye ansatte</li>
-	    <li>Vis alle ansatte</li>
-	    <li>Vis ældste ansatte</li>
-	    <li>Vis ansatte fordelt på afd.</li>
-	    <li>Vis lønninger</li>
-    </ul>
-    <br>
-    <br>
-    <form action="" method="post">
-<input type="number" name="emp_no" placeholder="Employees number"><br>
-<input type="date" name="birth_date" placeholder="birthday" ><br>
-<input type="text" name="first" placeholder="Firstname" ><br>
-<input type="text" name="last" placeholder="Lastname"><br>
-<input type="radio" name="gender" value="m" checked> Male<br>
-<input type="radio" name="gender" value="f"> Female<br>
-<input type="date" name="hire" placeholder="Hire date"><br>
-<br>
-<button type="submit">submit</button>
-    </form>
+	    <div id="content">
+		    <form action="" method="post">
+				<input type="number" name="emp_no" placeholder="Employees number"><br>
+				<input type="date" name="birth_date" placeholder="birthday" ><br>
+				<input type="text" name="first" placeholder="Firstname" ><br>
+				<input type="text" name="last" placeholder="Lastname"><br>
+				<input type="radio" name="gender" value="m" checked> Male<br>
+				<input type="radio" name="gender" value="f"> Female<br>
+				<input type="date" name="hire" placeholder="Hire date"><br>
+				<br>
+				<button type="submit">submit</button>
+		    </form>
+		</div>
+	</div>
 </body>
 </html>
