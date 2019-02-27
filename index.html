@@ -10,30 +10,36 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <h1 id="overskrift">Forside logo</h1>
+    <h1 id="overskrift">Frontpage logo</h1>
     <div id="main">
 	    <ul id="sidebar">
-		    <li class="selected" href="?frontpage">Forside</li>
-		    <li href="?newEmployee">Indsæt ny medarbejder</li>
-		    <li href="?newEmployee">Vis nye ansatte</li>
-		    <li href="?newEmployee">Vis alle ansatte</li>
-		    <li href="?newEmployee">Vis ældste ansatte</li>
-		    <li href="?newEmployee">Vis ansatte fordelt på afd.</li>
-		    <li href="?newEmployee">Vis lønninger</li>
+		    <li class="selected" href="?frontpage">Frontpage</li>
+		    <li href="?newEmployee">Insert new employee</li>
+		    <li href="?newEmployee">Show new employees</li>
+		    <li href="?newEmployee">Show all employees</li>
+		    <li href="?newEmployee">Show oldest employees</li>
+		    <li href="?newEmployee">Show employees grouped by department</li>
+		    <li href="?newEmployee">Show salaries</li>
 	    </ul>
 
 	    <div id="content">
-		    <form action="" method="post">
-				<input type="number" name="emp_no" placeholder="Employees number"><br>
-				<input type="date" name="birth_date" placeholder="birthday" ><br>
-				<input type="text" name="first" placeholder="Firstname" ><br>
-				<input type="text" name="last" placeholder="Lastname"><br>
-				<input type="radio" name="gender" value="m" checked> Male<br>
-				<input type="radio" name="gender" value="f"> Female<br>
-				<input type="date" name="hire" placeholder="Hire date"><br>
-				<br>
-				<button type="submit">submit</button>
-		    </form>
+	    	<div id="content_frontpage">
+	    		This is the frontpage
+	    	</div>
+	    	<div id="content_newEmployee">
+	    		Insert new employee<br>
+			    <form action="" method="post">
+					<input type="number" name="emp_no" placeholder="Employees number"><br>
+					<input type="date" name="birth_date" placeholder="birthday" ><br>
+					<input type="text" name="first" placeholder="Firstname" ><br>
+					<input type="text" name="last" placeholder="Lastname"><br>
+					<input type="radio" name="gender" value="m" checked> Male<br>
+					<input type="radio" name="gender" value="f"> Female<br>
+					<input type="date" name="hire" placeholder="Hire date"><br>
+					<br>
+					<button type="submit">submit</button>
+			    </form>
+			</div>
 		</div>
 	</div>
 </body>
