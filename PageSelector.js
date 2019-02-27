@@ -12,6 +12,10 @@ rest.page("/", function () {
     return rest.file("index.html")
 })
 
+rest.page("/style.css", function () {
+    return rest.file("style.css")
+})
+
 rest.start(8001) //Initialize the server
 
 //Declaring a root page
