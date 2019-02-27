@@ -9,6 +9,7 @@ var eventEmitter = new events.EventEmitter();
 var http = require("http")
 var url = require("url")
 var fs = require("fs")
+var mime = require("mime")
 
 var conn = 0
 
@@ -74,8 +75,8 @@ function handleQueryObject(query, res) {
 }
 
 function handleFileObject(query, res) {
-    fs.readFile(query.filepath, function (err, data) {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
+    fs.readFile(query.filepath, function (err, data) {        
+        res.writeHead(200, { 'Content-Type': mime.getType('.\\' + query.filepath) });
         res.end(data)
     })
 }
