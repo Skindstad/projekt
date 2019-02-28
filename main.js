@@ -31,6 +31,8 @@ $(document).ready(function(){
 
     $("li[href='?insert").click(function () {
         toggleInsert(["employees"]);
+        $("#content_insert > form option").prop("selected", false);
+        $("#content_insert > form").val("employees");
     });
 
     $("#database_table").change(function () {
