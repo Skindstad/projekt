@@ -67,7 +67,7 @@ form{
 .emp{
     width: 300px;
 }
-input{
+input, select{
     
     margin-top: 1%;
     height: auto;
@@ -87,6 +87,9 @@ button{
 button:hover {
     background-color: black;
     color: white;
+}
+.w60 {
+    width: 60%!important;
 }
 
 
