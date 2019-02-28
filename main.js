@@ -138,15 +138,6 @@ $(document).ready(function () {
 		e.preventDefault();
 		});
 
-        } else if (select == "salaries") {
-
-        } else {
-
-        }
-
-        e.preventDefault();
-    });
-
 
 
 
