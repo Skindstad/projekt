@@ -53,6 +53,9 @@ $(document).ready(function(){
 
 	/* Insert new employees to the database */
 	$("#emp").click(function(e){
+		var select = $("#database_table").val()
+	//	alert(select);
+		if(select == "employees"){
 		var emp_no = $("input[name='emp_no']").val();
 		var birth = $("input[type='date'][name='birth']").val();
 		var firstname = $("input:text[name='first']").val();
@@ -66,9 +69,28 @@ $(document).ready(function(){
 		
 			var querystring = "INSERT INTO employees(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES (" ;
 			querystring += emp_no + ", '" + birth + "','" + firstname + "','" + lastname + "','" + gender + "','" + hire + "')";
-			$("#content_newEmployee").load("/query?query=" + encodeURIComponent(querystring));
+			$("#new_employee").load("/query?query=" + encodeURIComponent(querystring));
 			
 		}
+	} else if ( select == "departments"){
+		var dept_no = $("input:text[name='dept_no']").val();
+		var dept_N = $("input:text[name='dept_N']").val();
+		if (dept_no == "" || dept_N == ""){
+			alert("please fill all fields!!!!")
+		} else {
+			alert(select)
+			var querystring = "INSERT INTO "+select+"(dept_no, dept_name) VALUES (" ;
+			querystring +="'d"+ dept_no + "', '" + dept_N +"')";
+			alert(querystring)
+			$("#new_departments").load("/query?query=" + encodeURIComponent(querystring));	
+		}
+	} else if ( select == "dept_emp" || "dept_manager"){
+
+	} else if ( select == "salaries"){
+
+	}else {
+
+	}
 		
 		e.preventDefault();
 		});
