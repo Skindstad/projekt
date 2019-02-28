@@ -62,30 +62,24 @@ $(document).ready(function(){
 
 
     /* Show all employees example with input fields for string manipulation and example view */
-    $("#fetch_allEmployeesByFirstName").click(function (e) {
-        $("input[name=showAllEmployees_query]").val("SELECT " +
-            $("input[name=showAllEmployees_query_fields]").val() +
-            " FROM " + $("input[name=showAllEmployees_query_table]").val() +
-            $("input[name=showAllEmployees_query_limit]").val());
+    function toggleShow(elmVisible, elmHref) {
+        $("#content_show > div").css("display", "none");
+        $("#content_" + elmVisible).css("display", "block");
 
-        $("#content_showAllEmployees_result_source").html(encodeURIComponent($("input[name=showAllEmployees_query]").val()));
+        $("#content_show > ul > li").attr("class", "");
+        $("li[href='?" + elmHref + "']").attr("class", "selected");
+    }
 
-        $("#content_showAllEmployees_result").load("/query?select=" + encodeURIComponent($("input[name=showAllEmployees_query]").val()));
-
-
-        e.preventDefault();
-
+    /* Show all employees */
+    $("li[href='?show']").click(function (e) {
+        toggleShow("showEmployees", "show");
+        var query = encodeURIComponent("SELECT * FROM employees LIMIT 10");
+        $("#content_employees").load("/query?select=" + query);
     });
-
-
-
-
-
-
-
 
     /* Show all departments */
     $("li[href='?showDepartments']").click(function (e) {
+        toggleShow("showDepartments", "showDepartments");
         var query = encodeURIComponent("SELECT * FROM departments");
         $("#content_departments").load("/query?select=" + query);
     });

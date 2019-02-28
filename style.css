@@ -88,3 +88,46 @@ button:hover {
     background-color: black;
     color: white;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#content_show > ul {
+    background: #aaa;
+    border: #000 solid 3px;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+#content_show > ul > li {
+    margin: 3px;
+    padding: 3px 0;
+    text-align: center;
+    background: #ddd;
+    border-radius: 5px;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+#content_show > ul > li:hover, #content_show > ul > li.selected {
+        background: #000;
+        color: #fff;
+}
