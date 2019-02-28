@@ -13,7 +13,7 @@
 <body>
     <h1 id="overskrift">Employees group assignment, frontpage</h1>
     <div id="main">
-    	<div id="sidebarHolder">
+        <div id="sidebarHolder">
             <ul id="sidebar">
                 <li class="selected" href="?frontpage">Frontpage</li>
                 <li href="?show">Show functions</li>
@@ -21,146 +21,155 @@
                 <li href="?delete">Update functions</li>
                 <li href="?update">Delete functions</li>
             </ul>
-		</div>
+        </div>
 
-	    <div id="content">
-            
+        <div id="content">
 
-        
-	    	<div id="content_frontpage">
-	    		This is the frontpage
-	    	</div>
-        <div id="content_insert">
-                <form class="emp" action="" method="post">
-                        <select class="w3-input w3-border w60" name="table" id="database_table">
-                            <option  value="employees">Employees</option>
-                            <option value="departments">Departments</option>
-                            <option value="dept_emp">Dept_emp</option>
-                            <option value="dept_manager">Dept_manager</option>
-                            <option value="salaries">Salaries</option>
-                            <option value="titles">Titles</option>
-                        </select><br>
-            <div id="newEmployee">
-	    		Insert new employee<br>
-	          
-	            <input class="w3-input w3-border w3-animate-input w60" type="number" name="emp_no" placeholder="Emp number"><br>
-                <label>Birthday</label><br>
-                <input class="w3-input w3-border w3-animate-input w60" type="date" name="birth" placeholder="birthday" ><br>
-	            <input class="w3-input w3-border w3-animate-input w60" type="text" name="first" placeholder="Firstname" ><br>
-	            <input class="w3-input w3-border w3-animate-input w60" type="text" name="last" placeholder="Lastname"><br>
-	            <input class="w3-radio" type="radio" name="gender"  value="M" checked> Male<br>
-	            <input class="w3-radio" type="radio" name="gender" value="F"> Female<br><br>
-                <label>Hire</label><br>
-                <input class="w3-input w3-border w3-animate-input w60" type="date" name="hire" placeholder="Hire date"><br>
-	            <br>
-              <button class="w3-btn w3-ripple" type="submit" name="emp" id="emp">submit</button>
+
+
+            <div id="content_frontpage">
+                This is the frontpage
             </div>
-            <div id="newDepartments">
-                    Insert new Departments<br>
-                      <input class="w3-input w3-border w3-animate-input w60" type="text" name="dept_no" placeholder="Dept number" ><br>
-                    <input class="w3-input w3-border w3-animate-input w60" type="text" name="dept_N" placeholder="department name"><br>
-                    <br>
-                  <button class="w3-btn w3-ripple" type="submit" name="depart" id="depart">submit</button>
-                </div>
-                <div id="content_newDept_emp">
-                        Insert new Dept_emp<br>
-                </div>
-                <div id="newDept_manager">
-                                Insert new Dept_manager<br>
-                </div>
-                    <div id="newDept">
-                        <input class="w3-input w3-border w3-animate-input w60"  type="number" name="emp_no" placeholder="Emp number"><br>
-                        <input class="w3-input w3-border w3-animate-input w60" type="text" name="dept_no" placeholder="Dept number" ><br>
+            <div id="content_insert">
+                <form class="emp" action="" method="post">
+                    <select class="w3-input w3-border w60" name="table" id="database_table">
+                        <option value="employees">Employees</option>
+                        <option value="departments">Departments</option>
+                        <option value="dept_emp">Dept_emp</option>
+                        <option value="dept_manager">Dept_manager</option>
+                        <option value="salaries">Salaries</option>
+                        <option value="titles">Titles</option>
+                    </select><br>
+                    <div id="new_employees">
+                        Insert new employee<br>
+
+                        <input class="w3-input w3-border w3-animate-input w60" type="number" name="emp_no" placeholder="Emp number"><br>
+                        <label>Birthday</label><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="date" name="birth" placeholder="birthday"><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="text" name="first" placeholder="Firstname"><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="text" name="last" placeholder="Lastname"><br>
+                        <input class="w3-radio" type="radio" name="gender" value="M" checked> Male<br>
+                        <input class="w3-radio" type="radio" name="gender" value="F"> Female<br><br>
+                        <label>Hire</label><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="date" name="hire" placeholder="Hire date"><br>
+                        <br>
+                        <button class="w3-btn w3-ripple" type="submit" name="emp" id="emp">submit</button>
+                    </div>
+
+                    <div id="new_departments">
+                        Insert new Departments<br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="text" name="dept_no" placeholder="Dept number"><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="text" name="dept_N" placeholder="department name"><br>
+                        <br>
+                        <button class="w3-btn w3-ripple" type="submit" name="depart" id="depart">submit</button>
+                    </div>
+
+
+
+                    <div id="new_dept">
+
+                        <div id="new_dept_emp">
+                            Insert new Dept_emp<br>
+                        </div>
+                        <div id="new_dept_manager">
+                            Insert new Dept_manager<br>
+                        </div>
+
+                        <input class="w3-input w3-border w3-animate-input w60" type="number" name="emp_no" placeholder="Emp number"><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="text" name="dept_no" placeholder="Dept number"><br>
                         <label>From:</label><br>
-                        <input class="w3-input w3-border w3-animate-input w60" type="date" name="form_d" placeholder="From date" ><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="date" name="form_d" placeholder="From date"><br>
                         <label>To:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="text" onfocus="(this.type='date')" name="to_d" placeholder="01-01-9999"><br>
                         <br>
-                      <button class="w3-btn w3-ripple" type="submit" name="dept" id="dept">submit</button>
-                    </div>
-                        <div id="newSalaries">
-                                Insert new Salaries<br>
-                                <input class="w3-input w3-border w3-animate-input w60" type="number" name="emp_no" placeholder="Emp number"><br>
-                                <input class="w3-input w3-border w3-animate-input w60" type="number" name="salar" placeholder="Salary" ><br>
-                                <label>From:</label><br>
-                                <input class="w3-input w3-border w3-animate-input w60" type="date" name="form_d" placeholder="From date" ><br>
-                                <label>To:</label><br>
-                                <input class="w3-input w3-border w3-animate-input w60" type="text" onfocus="(this.type='date')" name="to_d" placeholder="01-01-9999"><br>
-                                <br>
-                              <button class="w3-btn w3-ripple" type="submit" name="salar" id="salar">submit</button>
-                            </div>
-                            <div id="newTitles">
-                                    Insert new Titles<br>
-
-                                    <input class="w3-input w3-border w3-animate-input w60" type="number" name="emp_no" placeholder="Emp number"><br>
-                                    <input class="w3-input w3-border w3-animate-input w60" type="text" name="title" placeholder="Title"><br>
-                                    <label>From:</label><br>
-                                    <input class="w3-input w3-border w3-animate-input w60" type="date" name="form_d" placeholder="From date" ><br>
-                                    <label>To:</label><br>
-                                    <input class="w3-input w3-border w3-animate-input w60" type="text" onfocus="(this.type='date')" name="to_d" placeholder="01-01-9999"><br>
-                                    <br>
-                                  <button class="w3-btn w3-ripple" type="submit" name="title" id="title">submit</button>
-                                </div>
-                            </form>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <div id="content_show">
-                    <ul>
-                        <li href="?show">Show all employees</li>
-                        <li href="?showDepartments">Show all departments</li>
-                        <li href="?showDeptManager">Show department managers</li>
-                        <li href="?showTitles">Show titles</li>
-                        <li href="?showDeptEmp">Show department employees</li>
-                        <li href="?showSalaries">Show salaries</li>
-                    </ul>
-
-                    <div id="content_showEmployees">
-                        Employees:<br>
-                        <div id="contentData_showEmployees"></div>
+                        <button class="w3-btn w3-ripple" type="submit" name="dept" id="dept">submit</button>
                     </div>
 
-                    <div id="content_showDepartments">
-                        Departments:<br>
-                        <div id="contentData_showDepartments"></div>
+                    <div id="new_salaries">
+                        Insert new Salaries<br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="number" name="emp_no" placeholder="Emp number"><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="number" name="salar" placeholder="Salary"><br>
+                        <label>From:</label><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="date" name="form_d" placeholder="From date"><br>
+                        <label>To:</label><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="text" onfocus="(this.type='date')" name="to_d" placeholder="01-01-9999"><br>
+                        <br>
+                        <button class="w3-btn w3-ripple" type="submit" name="salar" id="salar">submit</button>
                     </div>
 
-                    <div id="content_showDeptManager">
-                        Department managers:<br>
-                        <div id="contentData_showDeptManager"></div>
+                    <div id="new_titles">
+                        Insert new Titles<br>
+
+                        <input class="w3-input w3-border w3-animate-input w60" type="number" name="emp_no" placeholder="Emp number"><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="text" name="title" placeholder="Title"><br>
+                        <label>From:</label><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="date" name="form_d" placeholder="From date"><br>
+                        <label>To:</label><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="text" onfocus="(this.type='date')" name="to_d" placeholder="01-01-9999"><br>
+                        <br>
+                        <button class="w3-btn w3-ripple" type="submit" name="title" id="title">submit</button>
                     </div>
 
-                    <div id="content_showTitles">
-                        Titles:<br>
-                        <div id="contentData_showTitles"></div>
-                    </div>
-
-                    <div id="content_showDeptEmp">
-                        Department employees:<br>
-                        <div id="contentData_showDeptEmp"></div>
-                    </div>
-
-                    <div id="content_showSalaries">
-                        Salaries:<br>
-                        <div id="contentData_showSalaries"></div>
-                    </div>
-
-                    
+                </form>
+            </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+            <div id="content_show">
+                <ul>
+                    <li href="?show">Show all employees</li>
+                    <li href="?showDepartments">Show all departments</li>
+                    <li href="?showDeptManager">Show department managers</li>
+                    <li href="?showTitles">Show titles</li>
+                    <li href="?showDeptEmp">Show department employees</li>
+                    <li href="?showSalaries">Show salaries</li>
+                </ul>
+
+                <div id="content_showEmployees">
+                    Employees:<br>
+                    <div id="contentData_showEmployees"></div>
                 </div>
-		</div>
-	</div>
+
+                <div id="content_showDepartments">
+                    Departments:<br>
+                    <div id="contentData_showDepartments"></div>
+                </div>
+
+                <div id="content_showDeptManager">
+                    Department managers:<br>
+                    <div id="contentData_showDeptManager"></div>
+                </div>
+
+                <div id="content_showTitles">
+                    Titles:<br>
+                    <div id="contentData_showTitles"></div>
+                </div>
+
+                <div id="content_showDeptEmp">
+                    Department employees:<br>
+                    <div id="contentData_showDeptEmp"></div>
+                </div>
+
+                <div id="content_showSalaries">
+                    Salaries:<br>
+                    <div id="contentData_showSalaries"></div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>

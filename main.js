@@ -18,7 +18,25 @@ $(document).ready(function(){
 
 
 
+    /* Insert select change functionality */
+    function toggleInsert(elmData, elmSecond = "") {
+        $("#content_insert > form > div").css("display", "none");
+        $("#new_" + elmData[0]).css("display", "block");
 
+        if (elmData.length == 2) {
+            $("#new_" + elmData[0] + " > div").css("display", "none");
+            $("#new_" + elmData[0] + "_" + elmData[1]).css("display", "block");
+        }
+    }
+
+    $("li[href='?insert").click(function () {
+        toggleInsert("employees");
+    });
+
+    $("#database_table").change(function () {
+        var selected = $(this).children("option:selected").val().split("_");
+        toggleInsert(selected);
+    });
 
 
 
