@@ -137,14 +137,59 @@ button:hover {
 
 .row1, .row2 {
     border-radius: 8px;
-    padding:5px;
-    display:grid;
-    grid-template-columns: auto auto auto auto;
+    margin: 0 auto 8px;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
 }
 
 .row1 {
     background: #999;
 }
 .row2 {
+    background: #888;
+}
+
+.row1 > div, .row2 > div {
+    position: relative;
+}
+
+
+#content_showEmployees .row1, #content_showEmployees .row2 {
+    grid-template-columns: 6% 20% 15% 15% 10% 17% 17%;
+}
+
+
+#content_show > div ul {
+    background: #333;
+    position:absolute;
+    top: -5px;
+    left: -5px;
+    border-radius: 8px;
+    width:100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+
+#content_show > div ul > li {
+    margin: 3px;
+    padding: 2px 0;
+    text-align: center;
+    border-radius: 5px;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+
+li.x {
+    color: #f00;
+}
+
+li.e {
+    color: #ff0;
+}
+
+li.x:hover, li.e:hover {
     background: #888;
 }

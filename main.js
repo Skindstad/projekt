@@ -151,11 +151,34 @@ $(document).ready(function () {
 
 
 
+
+
+
+
+
+
+
+
     /* Design    */
     var designColumns = {
-    a: ""
+        showEmployees: {
+            edit_delete: "",
+            emp_no: "Medarbejder nr.:",
+            first_name: "Fornavn:",
+            last_name: "Efternavn:",
+            gender: "Køn:",
+            birth_date : "Født:",
+            hire_date : "Ansat:"
+        },
 
-}
+        methods: {
+            birth_date: function (val) { return val.split("T")[0]; },
+            hire_date: function (val) { return val.split("T")[0]; },
+            edit_delete: function (val) {
+                return "<ul><li><input type=\"checkbox\"></li><li class=\"x\" title=\"Slet\">S</li><li class=\"e\" title=\"Ændre\">Æ</li></ul>";
+            }
+        }
+    }
     
 
 
@@ -164,19 +187,28 @@ $(document).ready(function () {
         $.getJSON("/query?select=" + query, function (data) {
             var rows = [];
 
-            //rows.push("<div class=\"row" + ((rows.length % 2) + 1) + "\">" + designIdentifier + "</div>");
-
             $.each(data, function (rowNumber, rowValues) {
-
                 var rowElement = "";
 
-                $.each(rowValues, function (identifier, value) {
-                    rowElement += "<div>'" + identifier + "' = '" + value + "'</div>";
-                });
+                /* If identifiers are specified - use these, otherwise use provided */
+                if (designColumns[designIdentifier])
+                    $.each(designColumns[designIdentifier], function (identifier, value) {
+
+                        /* If a specific function is assigned for an identifier - use returned value */
+                        if (designColumns["methods"][identifier])
+                            rowValues[identifier] = designColumns["methods"][identifier](rowValues[identifier]);
+
+                        rowElement += "<div>" + value + " " + rowValues[identifier] + "</div>";
+                    });
+                else
+                    $.each(rowValues, function (identifier, value) {
+                        rowElement += "<div>" + identifier + " " + value + "</div>";
+                    });
 
                 rows.push("<div class=\"row" + ((rows.length % 2) + 1) + "\">" + rowElement + "</div>");
             });
-            $("#contentData_" + designIdentifier).html(rows.join());
+
+            $("#contentData_" + designIdentifier).html(rows.join(""));
         });
     }
 
