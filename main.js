@@ -62,33 +62,32 @@ $(document).ready(function(){
 
 
     /* Show all employees example with input fields for string manipulation and example view */
-    function toggleShow(elmVisible, elmHref = elmVisible) {
+    function toggleShow(elmVisible, query, elmHref = elmVisible) {
         $("#content_show > div").css("display", "none");
         $("#content_" + elmVisible).css("display", "block");
 
         $("#content_show > ul > li").attr("class", "");
         $("li[href='?" + elmHref + "']").attr("class", "selected");
+
+        $("#contentData_" + elmVisible).load("/query?select=" + query);
     }
 
     /* Show all employees */
     $("li[href='?show']").click(function (e) {
-        toggleShow("showEmployees", "show");
         var query = encodeURIComponent("SELECT * FROM employees LIMIT 10");
-        $("#content_employees").load("/query?select=" + query);
+        toggleShow("showEmployees", query, "show");
     });
 
     /* Show all departments */
     $("li[href='?showDepartments']").click(function (e) {
-        toggleShow("showDepartments");
         var query = encodeURIComponent("SELECT * FROM departments");
-        $("#content_departments").load("/query?select=" + query);
+        toggleShow("showDepartments", query);
     });
 
     /* Show manager of departments */
     $("li[href='?showDeptManager']").click(function (e) {
-        toggleShow("showDeptManager");
         var query = encodeURIComponent("SELECT * FROM dept_manager");
-        $("#content_DeptManager").load("/query?select=" + query);
+        toggleShow("showDeptManager", query);
     });
 
 
