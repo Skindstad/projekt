@@ -62,7 +62,7 @@ $(document).ready(function(){
 
 
     /* Show all employees example with input fields for string manipulation and example view */
-    function toggleShow(elmVisible, elmHref) {
+    function toggleShow(elmVisible, elmHref = elmVisible) {
         $("#content_show > div").css("display", "none");
         $("#content_" + elmVisible).css("display", "block");
 
@@ -79,9 +79,16 @@ $(document).ready(function(){
 
     /* Show all departments */
     $("li[href='?showDepartments']").click(function (e) {
-        toggleShow("showDepartments", "showDepartments");
+        toggleShow("showDepartments");
         var query = encodeURIComponent("SELECT * FROM departments");
         $("#content_departments").load("/query?select=" + query);
+    });
+
+    /* Show manager of departments */
+    $("li[href='?showDeptManager']").click(function (e) {
+        toggleShow("showDeptManager");
+        var query = encodeURIComponent("SELECT * FROM dept_manager");
+        $("#content_DeptManager").load("/query?select=" + query);
     });
 
 
