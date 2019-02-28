@@ -14,17 +14,13 @@
     <h1 id="overskrift">Frontpage logo</h1>
     <div id="main">
     	<div id="sidebarHolder">
-		    <ul id="sidebar">
-			    <li class="selected" href="?frontpage">Frontpage</li>
-			    <li href="?showAllEmployees">Show all employees</li>
-			    <li href="?showDepartments">Show departments</li>
-			    <li href="?frontpage">TODO:</li>
-			    <li href="?newEmployee">Insert new employee</li>
-			    <li href="?frontpage">Show new employees</li>
-			    <li href="?frontpage">Show oldest employees</li>
-			    <li href="?frontpage">Show employees grouped by department</li>
-			    <li href="?frontpage">Show salaries</li>
-		    </ul>
+            <ul id="sidebar">
+                <li class="selected" href="?frontpage">Frontpage</li>
+                <li href="?show">Show functions</li>
+                <li href="?insert">Insert functions</li>
+                <li href="?delete">Update functions</li>
+                <li href="?update">Delete functions</li>
+            </ul>
 		</div>
 
 	    <div id="content">
@@ -34,7 +30,7 @@
 	    	<div id="content_frontpage">
 	    		This is the frontpage
 	    	</div>
-	    	<div id="content_newEmployee">
+	    	<div id="content_insert">
                     
                         <select name="table" id="database_table">
                             <option value="employees">Employees</option>
@@ -56,7 +52,7 @@
 
 
 
-			<div id="content_showAllEmployees">
+			<div id="content_show">
 	    		Show all employees<br>
 	          <form class="emp" action="" method="post">
 	            Table <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_table" value="employees"><br>
