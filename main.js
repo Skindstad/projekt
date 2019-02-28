@@ -90,6 +90,24 @@ $(document).ready(function(){
         toggleShow("showDeptManager", query);
     });
 
+    /* Show titles */
+    $("li[href='?showTitles']").click(function (e) {
+        var query = encodeURIComponent("SELECT * FROM titles LIMIT 10");
+        toggleShow("showTitles", query);
+    });
+
+    /* Show department employees */
+    $("li[href='?showDeptEmp']").click(function (e) {
+        var query = encodeURIComponent("SELECT * FROM dept_emp LIMIT 10");
+        toggleShow("showDeptEmp", query);
+    });
+
+    /* Show salaries */
+    $("li[href='?showSalaries']").click(function (e) {
+        var query = encodeURIComponent("SELECT * FROM salaries LIMIT 10");
+        toggleShow("showSalaries", query);
+    });
+
 
 				/* TODO : INSERT ... works now.
 	INSERT INTO departments(dept_no, dept_name) VALUES("d999", "Test");*/
