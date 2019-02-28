@@ -1,11 +1,11 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-	/* Menu bar - title-, page- and button_background- change */
-	$("#sidebar li").click(function(){
-		$("#sidebar li").attr("class", "");
-		$(this).attr("class", "selected");
+    /* Menu bar - title-, page- and button_background- change */
+    $("#sidebar li").click(function () {
+        $("#sidebar li").attr("class", "");
+        $(this).attr("class", "selected");
 
-		$("#content > div").css("display", "none");
+        $("#content > div").css("display", "none");
         $("#content_" + this.getAttribute("href").substring(1)).css("display", "block");
 
         var newTitle = $(document).attr("title").split(",")[0] + ", " + this.innerHTML;
@@ -138,23 +138,63 @@ $(document).ready(function(){
 		e.preventDefault();
 		});
 
+        } else if (select == "salaries") {
+
+        } else {
+
+        }
+
+        e.preventDefault();
+    });
 
 
 
 
 
+
+
+
+
+
+    /* Design    */
+    var designColumns = {
+    a: ""
+
+}
+    
+
+
+    /* Insert the retrieved data */
+    function insertData(query, designIdentifier) {
+        $.getJSON("/query?select=" + query, function (data) {
+            var rows = [];
+
+            //rows.push("<div class=\"row" + ((rows.length % 2) + 1) + "\">" + designIdentifier + "</div>");
+
+            $.each(data, function (rowNumber, rowValues) {
+
+                var rowElement = "";
+
+                $.each(rowValues, function (identifier, value) {
+                    rowElement += "<div>'" + identifier + "' = '" + value + "'</div>";
+                });
+
+                rows.push("<div class=\"row" + ((rows.length % 2) + 1) + "\">" + rowElement + "</div>");
+            });
+            $("#contentData_" + designIdentifier).html(rows.join());
+        });
+    }
 
 
 
     /* Show all employees example with input fields for string manipulation and example view */
     function toggleShow(elmVisible, query, elmHref = elmVisible) {
-        $("#content_show > div").css("display", "none");
+        $("#content_show > div[class!='limiter']").css("display", "none");
         $("#content_" + elmVisible).css("display", "block");
 
         $("#content_show > ul > li").attr("class", "");
         $("li[href='?" + elmHref + "']").attr("class", "selected");
-
-        $("#contentData_" + elmVisible).load("/query?select=" + query);
+        insertData(query, elmVisible);
     }
 
     /* Show all employees */

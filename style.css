@@ -134,3 +134,17 @@ button:hover {
         background: #000;
         color: #fff;
 }
+
+.row1, .row2 {
+    border-radius: 8px;
+    padding:5px;
+    display:grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.row1 {
+    background: #999;
+}
+.row2 {
+    background: #888;
+}
