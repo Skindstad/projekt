@@ -30,27 +30,16 @@
 	    	<div id="content_frontpage">
 	    		This is the frontpage
 	    	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	    	<div id="content_insert">
-                    
-                        <select name="table" id="database_table">
-                            <option value="employees">Employees</option>
+                <div id="content_insert">
+                        <select class="w3-input w3-border" style="width: 60%;" name="table" id="database_table">
+                            <option  value="employees">Employees</option>
+                            <option value="departments">Departments</option>
+                            <option value="dept_emp">Dept_emp</option>
+                            <option value="dept_manager">Dept_manager</option>
+                            <option value="salaries">Salaries</option>
+                            <option value="titles">Titles</option>
                         </select><br>
-                
+            <div id="content_newEmployee">
 	    		Insert new employee<br>
 	          <form class="emp" action="" method="post">
 	            <input class="w3-input w3-border w3-animate-input" style="width: 60%;" type="number" name="emp_no" placeholder="Emp number"><br>
@@ -64,6 +53,7 @@
               <button class="w3-btn w3-ripple" type="submit" name="submit" id="submit">submit</button>
 	          </form>
 			</div>
+        </div>
 
 
 
