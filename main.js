@@ -30,7 +30,7 @@ $(document).ready(function(){
     }
 
     $("li[href='?insert").click(function () {
-        toggleInsert("employees");
+        toggleInsert(["employees"]);
     });
 
     $("#database_table").change(function () {
