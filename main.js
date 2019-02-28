@@ -24,7 +24,7 @@ $(document).ready(function(){
         $("#new_" + elmData[0]).css("display", "block");
 
         if (elmData.length == 2) {
-            $("#new_" + elmData[0] + " > div").css("display", "none");
+            $("#new_" + elmData[0] + " .toggleInp").css("display", "none");
             $("#new_" + elmData[0] + "_" + elmData[1]).css("display", "block");
         }
     }
