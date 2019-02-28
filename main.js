@@ -53,7 +53,10 @@ $(document).ready(function () {
 
 	/* Insert new employees to the database */
 	$("#emp").click(function(e){
-		var select = $("#database_table").val()
+        var select = $("#database_table").val()
+
+        alert(select);
+
 	//	alert(select);
 
 		if(select == "employees"){
@@ -65,7 +68,7 @@ $(document).ready(function () {
 		var hire = $("input[type='date'][name='hire']").val();
 			
 		if (emp_no == "" || birth == "dd-mm-åååå" || firstname == "" || lastname == "" || hire == "dd-mm-åååå"){
-			alert("please fill all fields!!!!")
+			alert("please fill all fields!!!!1")
 		} else {
 		
 			var querystring = "INSERT INTO employees(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES (" ;
@@ -77,22 +80,22 @@ $(document).ready(function () {
 		var dept_no = $("input:text[name='dept_no']").val();
 		var dept_N = $("input:text[name='dept_N']").val();
 		if (dept_no == "" || dept_N == ""){
-			alert("please fill all fields!!!!")
+			alert("please fill all fields!!!!2")
 		} else {
 			var querystring = "INSERT INTO "+select+"(dept_no, dept_name) VALUES (" ;
 			querystring +="'d"+ dept_no + "', '" + dept_N +"')";
 			$("#new_departments").load("/query?query=" + encodeURIComponent(querystring));	
 		}
-	} else if ( select == "dept_emp" || "dept_manager"){
+        } else if (select == "dept_emp" || select == "dept_manager"){
 		var emp_no = $("input[name='emp_n']").val();
 		var dept_no = $("input:text[name='dept_n']").val();
 		var form_d = $("input[type='date'][name='form_d']").val();
 		var to_d = $("input[type='date'][name='to_d']").val();
 
 		if (emp_no == "" || dept_no == "" || form_d == "dd-mm-åååå"){
-			alert("please fill all fields!!!!")
-		} else {
-			if (to_d == "" || "undefined"){
+			alert("please fill all fields!!!!3")
+        } else {
+            if (to_d == "" || !to_d) {
 				to_d = "01-01-9999";
 			}
 			var querystring = "INSERT INTO "+select+"(emp_no ,dept_no, form_date, to_date) VALUES (" ;
@@ -106,12 +109,13 @@ $(document).ready(function () {
 		var salar = $("input:text[name='salar']").val();
 		var form_d = $("input[type='date'][name='form']").val();
 		var to_d = $("input[type='date'][name='to']").val();
-		if (emp_no == "" || salar == "" || form_d == "dd-mm-åååå"){
-			alert("please fill all fields!!!!")
+        if (emp_no == "" || salar == "" || form_d == "dd-mm-åååå") {
+			alert("please fill all fields!!!!4")
 		} else {
-			if (to_d == "" || "undefined"){
+            if (to_d == "" || !to_d){
 				to_d = "01-01-9999";
-			}
+            }
+            
 			var querystring = "INSERT INTO "+select+"(emp_no ,salary, form_date, to_date) VALUES (" ;
 			querystring += emp_no + ","+ salar + ", '" + form_d +"','"+ to_d +"')";
 			$("#new_departments").load("/query?query=" + encodeURIComponent(querystring));
@@ -122,10 +126,10 @@ $(document).ready(function () {
 				var title = $("input:text[name='title']").val();
 				var form_d = $("input[type='date'][name='form_date']").val();
 				var to_d = $("input[type='date'][name='to_date']").val();
-				if (emp_no == "" || title == "" || form_d == "dd-mm-åååå"){
-					alert("please fill all fields!!!!")
-				} else {
-					if (to_d == "" || "undefined"){
+            if (emp_no == "" || title == "" || form_d == "dd-mm-åååå") {
+					alert("please fill all fields!!!!5")
+            } else {
+                if (to_d == "" || !to_d) {
 						to_d = "01-01-9999";
 					}
 					var querystring = "INSERT INTO "+select+"(emp_no ,title, form_date, to_date) VALUES (" ;
