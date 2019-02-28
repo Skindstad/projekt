@@ -11,23 +11,22 @@ $(document).ready(function(){
 		$(document).attr("title", $(document).attr("title").split(",")[0] + ", " + this.innerHTML);
 	});
 
-	/* Show all employees example with input fields for string manipulation and example view */
-	$("#fetch_allEmployeesByFirstName").click(function(e){
-		$("input[name=showAllEmployees_query]").val("SELECT " +
-			$("input[name=showAllEmployees_query_fields]").val() +
-			" FROM " + $("input[name=showAllEmployees_query_table]").val() +
-			$("input[name=showAllEmployees_query_limit]").val());
-
-		$("#content_showAllEmployees_result_source").html(encodeURIComponent($("input[name=showAllEmployees_query]").val()));
-
-		$("#content_showAllEmployees_result").load("/query?select=" + encodeURIComponent($("input[name=showAllEmployees_query]").val()));
 
 
-		e.preventDefault();
 
-	});
 
-	/*insert new employees to the database*/
+
+
+
+
+
+
+
+
+
+
+
+	/* Insert new employees to the database */
 	$("#submit").click(function(e){
 		var emp_no = $("input[name='emp_no']").val();
 		var birth = $("input[type='date'][name='birth']").val();
@@ -49,11 +48,42 @@ $(document).ready(function(){
 		e.preventDefault();
 		});
 
-	/* Show all departments */
-	$("li[href='?showDepartments']").click(function(e){
-		var query = encodeURIComponent("SELECT * FROM departments");
-		$("#content_departments").load("/query?select=" + query);
-	});
+
+
+
+
+
+
+
+
+    /* Show all employees example with input fields for string manipulation and example view */
+    $("#fetch_allEmployeesByFirstName").click(function (e) {
+        $("input[name=showAllEmployees_query]").val("SELECT " +
+            $("input[name=showAllEmployees_query_fields]").val() +
+            " FROM " + $("input[name=showAllEmployees_query_table]").val() +
+            $("input[name=showAllEmployees_query_limit]").val());
+
+        $("#content_showAllEmployees_result_source").html(encodeURIComponent($("input[name=showAllEmployees_query]").val()));
+
+        $("#content_showAllEmployees_result").load("/query?select=" + encodeURIComponent($("input[name=showAllEmployees_query]").val()));
+
+
+        e.preventDefault();
+
+    });
+
+
+
+
+
+
+
+
+    /* Show all departments */
+    $("li[href='?showDepartments']").click(function (e) {
+        var query = encodeURIComponent("SELECT * FROM departments");
+        $("#content_departments").load("/query?select=" + query);
+    });
 
 
 				/* TODO : INSERT ... works now.

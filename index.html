@@ -30,6 +30,21 @@
 	    	<div id="content_frontpage">
 	    		This is the frontpage
 	    	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	    	<div id="content_insert">
                     
                         <select name="table" id="database_table">
@@ -52,19 +67,32 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 			<div id="content_show">
+                <ul>
+                    <li>Show all employees</li>
+                </ul>
 	    		Show all employees<br>
-	          <form class="emp" action="" method="post">
-	            Table <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_table" value="employees"><br>
-	            Fields <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_fields" value="*"><br>
-	            Fields <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_limit" value=" LIMIT 100"><br>
+	            <form class="emp" action="" method="post">
+                    Table <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_table" value="employees"><br>
+	                Fields <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_fields" value="*"><br>
+	                Fields <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query_limit" value=" LIMIT 100"><br>
 
-	            Result: <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query"><br>
-	            <button id="fetch_allEmployeesByFirstName" type="submit">Sort by firstName</button>
-	          </form>
+	                Result: <input class="w3-input w3-border w3-animate-input" type="text" name="showAllEmployees_query"><br>
+	                <button id="fetch_allEmployeesByFirstName" type="submit">Sort by firstName</button>
+	            </form>
 
-	          <div id="content_showAllEmployees_result">aaa</div>
-	          <div id="content_showAllEmployees_result_source">aaa</div>
+	            <div id="content_showAllEmployees_result">aaa</div>
+	            <div id="content_showAllEmployees_result_source">aaa</div>
 			</div>
 
 
@@ -72,10 +100,6 @@
 	    		Departments:<br>
 	          <div id="content_departments"></div>
 			</div>
-
-
-
-
 		</div>
 	</div>
 </body>
