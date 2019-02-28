@@ -6,10 +6,15 @@ $(document).ready(function(){
 		$(this).attr("class", "selected");
 
 		$("#content > div").css("display", "none");
-		$("#content_" + this.getAttribute("href").substring(1)).css("display", "block");
+        $("#content_" + this.getAttribute("href").substring(1)).css("display", "block");
 
-		$(document).attr("title", $(document).attr("title").split(",")[0] + ", " + this.innerHTML);
-	});
+        var newTitle = $(document).attr("title").split(",")[0] + ", " + this.innerHTML;
+
+        $(document).attr("title", newTitle);
+        $("#overskrift").html(newTitle);
+    });
+
+
 
 
 
