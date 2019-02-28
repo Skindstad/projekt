@@ -47,18 +47,28 @@ $(document).ready(function () {
 
 
 
-
+function emp(data) {
+	var emp_no = data.emp_no;
+	$.each(data,function(id,value){
+		$.each(value,function(id,value){
+		alert(id + "-" + value);
+		})
+	})
+	//	alert(emp_no)
+	/*
+	var querystring = "INSERT INTO "+ select +"(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES (" ;
+			querystring += emp_no + ", '" + birth + "','" + firstname + "','" + lastname + "','" + gender + "','" + hire + "')";
+			alert(querystring);
+			$("#new_employees").load("/query?query=" + encodeURIComponent(querystring));
+*/
+		}
 
 
 
 	/* Insert new employees to the database */
 	$("#emp").click(function(e){
-        var select = $("#database_table").val()
-
-        alert(select);
-
-	//	alert(select);
-
+		var select = $("#database_table").val();
+		
 		if(select == "employees"){
 		var emp_no = $("input[name='emp_no']").val();
 		var birth = $("input[type='date'][name='birth']").val();
@@ -66,35 +76,54 @@ $(document).ready(function () {
 		var lastname = $("input:text[name='last']").val();
 		var gender = $("input:radio[name='gender']:checked").val();
 		var hire = $("input[type='date'][name='hire']").val();
-			
-		if (emp_no == "" || birth == "dd-mm-åååå" || firstname == "" || lastname == "" || hire == "dd-mm-åååå"){
+
+		if (birth == "dd-mm-åååå" || firstname == "" || lastname == "" || hire == "dd-mm-åååå"){
 			alert("please fill all fields!!!!1")
 		} else {
-		
-			var querystring = "INSERT INTO employees(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES (" ;
+			var emp_no = 0;
+			var query = "select emp_no from employees order by emp_no desc limit 1";
+			$.getJSON("/query?select=" + encodeURIComponent(query),function(data){
+				emp(data);
+			} )
+
+
+
+			/*
+			var querystring = "INSERT INTO "+ select +"(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES (" ;
 			querystring += emp_no + ", '" + birth + "','" + firstname + "','" + lastname + "','" + gender + "','" + hire + "')";
-			$("#new_employee").load("/query?query=" + encodeURIComponent(querystring));
-			
+			alert(querystring);
+			$("#new_employees").load("/query?query=" + encodeURIComponent(querystring));
+			*/
 		}
 	} else if ( select == "departments"){
-		var dept_no = $("input:text[name='dept_no']").val();
+		var dept_no = $("#new_departments input[name='dept_no']").val();
 		var dept_N = $("input:text[name='dept_N']").val();
 		if (dept_no == "" || dept_N == ""){
 			alert("please fill all fields!!!!2")
 		} else {
-			var querystring = "INSERT INTO "+select+"(dept_no, dept_name) VALUES (" ;
+			alert(dept_no);
+			if(dept_no >= 1000){
+				alert("dept number have to be only maxlength 3")
+				return;
+			}else {
+			var querystring = "INSERT INTO "+ select +"(dept_no, dept_name) VALUES (" ;
 			querystring +="'d"+ dept_no + "', '" + dept_N +"')";
 			$("#new_departments").load("/query?query=" + encodeURIComponent(querystring));	
+			}
 		}
         } else if (select == "dept_emp" || select == "dept_manager"){
 		var emp_no = $("input[name='emp_n']").val();
-		var dept_no = $("input:text[name='dept_n']").val();
+		var dept_no = $("#new_dept input[name='dept_n']").val();
 		var form_d = $("input[type='date'][name='form_d']").val();
 		var to_d = $("input[type='date'][name='to_d']").val();
 
 		if (emp_no == "" || dept_no == "" || form_d == "dd-mm-åååå"){
 			alert("please fill all fields!!!!3")
         } else {
+			if(dept_no >= 1000){
+				alert("dept number have to be only maxlength 3")
+				return;
+			}else {
             if (to_d == "" || !to_d) {
 				to_d = "01-01-9999";
 			}
@@ -103,6 +132,7 @@ $(document).ready(function () {
 			$("#new_departments").load("/query?query=" + encodeURIComponent(querystring));	
 			
 		}
+	}
 
 	} else if ( select == "salaries"){
 		var emp_no = $("input[name='emp']").val();
@@ -115,7 +145,6 @@ $(document).ready(function () {
             if (to_d == "" || !to_d){
 				to_d = "01-01-9999";
             }
-            
 			var querystring = "INSERT INTO "+select+"(emp_no ,salary, form_date, to_date) VALUES (" ;
 			querystring += emp_no + ","+ salar + ", '" + form_d +"','"+ to_d +"')";
 			$("#new_departments").load("/query?query=" + encodeURIComponent(querystring));
@@ -137,7 +166,7 @@ $(document).ready(function () {
 					alert(querystring)
 					$("#new_departments").load("/query?query=" + encodeURIComponent(querystring));
 				}
-				}
+			}
 		
 		e.preventDefault();
 		});

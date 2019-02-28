@@ -42,37 +42,42 @@
                     </select><br>
                     <div id="new_employees">
                         Insert new employee<br>
-
-                        <input class="w3-input w3-border w3-animate-input w60" type="number" name="emp_no" placeholder="Emp number"><br>
-                        <label>Birthday</label><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="hidden" name="emp_no" placeholder="Emp number"><br>
+                        <label>Birthday:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="date" name="birth" placeholder="birthday"><br>
+                        <label>Firstname:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="text" name="first" placeholder="Firstname"><br>
+                        <label>lastname:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="text" name="last" placeholder="Lastname"><br>
+                        <label>Gender:</label><br>
                         <input class="w3-radio" type="radio" name="gender" value="M" checked> Male<br>
                         <input class="w3-radio" type="radio" name="gender" value="F"> Female<br><br>
-                        <label>Hire</label><br>
+                        <label>Hire:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="date" name="hire" placeholder="Hire date"><br>
                         <br>
                     </div>
 
                     <div id="new_departments">
-                        Insert new Departments<br>
-                        <input class="w3-input w3-border w3-animate-input w60" type="text" name="dept_no" placeholder="Dept number"><br>
+                        Insert new Departments<br><br>
+                        <label>Department number:</label><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="number" name="dept_no" placeholder="Dept number" min="001" max="999"><br>
+                        <label>Departmant Name:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="text" name="dept_N" placeholder="department name"><br>
                         <br>
                     </div>
 
-
                     <div id="new_dept">
 
                         <div id="new_dept_emp" class="toggleInp">
-                            Insert new Dept_emp<br>
+                            Insert new Dept_emp<br><br>
                         </div>
                         <div id="new_dept_manager" class="toggleInp">
-                            Insert new Dept_manager<br>
+                            Insert new Dept_manager<br><br>
                         </div>
+                        <label>Employees Number:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="number" name="emp_n" placeholder="Emp number"><br>
-                        <input class="w3-input w3-border w3-animate-input w60" type="text" name="dept_n" placeholder="Dept number"><br>
+                        <label>Department number:</label><br>
+                        <input class="w3-input w3-border w3-animate-input w60" type="number" name="dept_n" placeholder="Dept number"  min="001" max="999"><br>
                         <label>From:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="date" name="form_d" placeholder="From date"><br>
                         <label>To:</label><br>
@@ -82,8 +87,10 @@
                     </div>
 
                     <div id="new_salaries">
-                        Insert new Salaries<br>
+                        Insert new Salaries<br><br>
+                        <label>Employees Number:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="number" name="emp" placeholder="Emp number"><br>
+                        <label>Salary:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="number" name="salar" placeholder="Salary"><br>
                         <label>From:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="date" name="form" placeholder="From date"><br>
@@ -93,9 +100,10 @@
                     </div>
 
                     <div id="new_titles">
-                        Insert new Titles<br>
-
+                        Insert new Titles<br><br>
+                        <label>Employees Number:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="number" name="emp_nu" placeholder="Emp number"><br>
+                        <label>Title:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="text" name="title" placeholder="Title"><br>
                         <label>From:</label><br>
                         <input class="w3-input w3-border w3-animate-input w60" type="date" name="form_date" placeholder="From date"><br>
