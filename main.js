@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 
 	/* Insert new employees to the database */
-	$("#submit").click(function(e){
+	$("#emp").click(function(e){
 		var emp_no = $("input[name='emp_no']").val();
 		var birth = $("input[type='date'][name='birth']").val();
 		var firstname = $("input:text[name='first']").val();
