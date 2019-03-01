@@ -59,12 +59,6 @@ $(document).ready(function () {
         });
     }
 
-    /*
-$("#dept_no").change(function(){
-	var query = encodeURIComponent("SELECT dept_no FROM departments");
-	toggleInsert("<option value='", query, "'>", query,"</option>");
-})*/
-
 
 
 
@@ -72,13 +66,13 @@ function emp(data,querystring,querystring2) {
 	var emp_no = data.emp_no;
 	$.each(data,function(id,value){
 		$.each(value,function(id,value){
-		alert(id + "-" + value);
+		//alert(id + "-" + value);
 		emp_no = 1 + value;
-		alert(emp_no)
+		//alert(emp_no)
 		})
 	})
 	querystring += emp_no + querystring2;
-		alert(querystring)
+		//alert(querystring)
 			$("#new_employees").load("/query?query=" + encodeURIComponent(querystring));
 		}
 
@@ -117,7 +111,7 @@ function emp(data,querystring,querystring2) {
 		if (dept_no == "" || dept_N == ""){
 			alert("please fill all fields!!!!2")
 		} else {
-			alert(dept_no);
+			//alert(dept_no);
 			if(dept_no >= 1000){
 				alert("dept number have to be only maxlength 3")
 				return;
@@ -129,58 +123,57 @@ function emp(data,querystring,querystring2) {
 		}
         } else if (select == "dept_emp" || select == "dept_manager"){
 		var emp_no = $("input[name='emp_n']").val();
-		var dept_no = $("#new_dept input[name='dept_n']").val();
+		var dept_no = $("#dept_no").val();
 		var form_d = $("input[type='date'][name='form_d']").val();
 		var to_d = $("input[type='date'][name='to_d']").val();
-
-		if (emp_no == "" || dept_no == "" || form_d == "dd-mm-åååå"){
+		alert(dept_no)
+		if (emp_no == "" || form_d == "dd-mm-åååå"){
 			alert("please fill all fields!!!!3")
-        } else {
-			if(dept_no >= 1000){
-				alert("dept number have to be only maxlength 3")
-				return;
 			}else {
             if (to_d == "" || !to_d) {
-				to_d = "01-01-9999";
+				to_d = "9999-01-01";
 			}
-			var querystring = "INSERT INTO "+select+"(emp_no ,dept_no, form_date, to_date) VALUES (" ;
-			querystring += emp_no + ",'d"+ dept_no + "', '" + form_d +"','"+ to_d +"')";
-			$("#new_departments").load("/query?query=" + encodeURIComponent(querystring));	
+			var querystring = "INSERT INTO "+select+"(emp_no ,dept_no, from_date, to_date) VALUES (" ;
+			querystring += emp_no + ",'"+ dept_no + "', '" + form_d +"','"+ to_d +"')";
+			alert(querystring)
+			$("#new_dept").load("/query?query=" + encodeURIComponent(querystring));	
 			
 		}
-	}
+
 
 	} else if ( select == "salaries"){
 		var emp_no = $("input[name='emp']").val();
-		var salar = $("input:text[name='salar']").val();
-		var form_d = $("input[type='date'][name='form']").val();
-		var to_d = $("input[type='date'][name='to']").val();
-        if (emp_no == "" || salar == "" || form_d == "dd-mm-åååå") {
+		var salar = $("input[name='salar']").val();
+		var from = $("input[type='date'][name='from']").val();
+		var to = $("input[type='date'][name='to']").val();
+		alert(salar)
+        if (emp_no == "" || salar == "" || from == "dd-mm-åååå") {
 			alert("please fill all fields!!!!4")
 		} else {
-            if (to_d == "" || !to_d){
-				to_d = "01-01-9999";
+            if (to == "" || !to){
+				to = "9999-01-01";
             }
-			var querystring = "INSERT INTO "+select+"(emp_no ,salary, form_date, to_date) VALUES (" ;
-			querystring += emp_no + ","+ salar + ", '" + form_d +"','"+ to_d +"')";
-			$("#new_departments").load("/query?query=" + encodeURIComponent(querystring));
+			var querystring = "INSERT INTO "+select+"(emp_no ,salary, from_date, to_date) VALUES (" ;
+			querystring += emp_no + ","+ salar + ", '" + from +"','"+ to +"')";
+			alert(querystring)
+			$("#new_salaries").load("/query?query=" + encodeURIComponent(querystring));
 		}
 			}else {
 				alert(select)
 				var emp_no = $("input[name='emp_nu']").val();
 				var title = $("input:text[name='title']").val();
-				var form_d = $("input[type='date'][name='form_date']").val();
-				var to_d = $("input[type='date'][name='to_date']").val();
-            if (emp_no == "" || title == "" || form_d == "dd-mm-åååå") {
+				var form_date = $("input[type='date'][name='form_date']").val();
+				var to_date = $("input[type='date'][name='to_date']").val();
+            if (emp_no == "" || title == "" || form_date == "dd-mm-åååå") {
 					alert("please fill all fields!!!!5")
             } else {
-                if (to_d == "" || !to_d) {
-						to_d = "01-01-9999";
+                if (to_date == "" || !to_date) {
+					to_date = "9999-01-01";
 					}
-					var querystring = "INSERT INTO "+select+"(emp_no ,title, form_date, to_date) VALUES (" ;
-					querystring += emp_no + ","+ title + ", '" + form_d +"','"+ to_d +"')";
+					var querystring = "INSERT INTO "+select+"(emp_no ,title, from_date, to_date) VALUES (" ;
+					querystring += emp_no + ",'"+ title + "', '" + form_date +"','"+ to_date +"')";
 					alert(querystring)
-					$("#new_departments").load("/query?query=" + encodeURIComponent(querystring));
+					$("#new_titles").load("/query?query=" + encodeURIComponent(querystring));
 				}
 			}
 		
