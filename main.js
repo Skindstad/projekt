@@ -47,20 +47,26 @@ $(document).ready(function () {
 
 
 
-function emp(data) {
+$("#dept_no").change(function(){
+	var query = encodeURIComponent("SELECT dept_no FROM departments");
+	toggleInsert("<option value='", query, "'>", query,"</option>");
+})
+
+
+
+
+function emp(data,querystring,querystring2) {
 	var emp_no = data.emp_no;
 	$.each(data,function(id,value){
 		$.each(value,function(id,value){
 		alert(id + "-" + value);
+		emp_no = 1 + value;
+		alert(emp_no)
 		})
 	})
-	//	alert(emp_no)
-	/*
-	var querystring = "INSERT INTO "+ select +"(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES (" ;
-			querystring += emp_no + ", '" + birth + "','" + firstname + "','" + lastname + "','" + gender + "','" + hire + "')";
-			alert(querystring);
+	querystring += emp_no + querystring2;
+		alert(querystring)
 			$("#new_employees").load("/query?query=" + encodeURIComponent(querystring));
-*/
 		}
 
 
@@ -81,19 +87,16 @@ function emp(data) {
 			alert("please fill all fields!!!!1")
 		} else {
 			var emp_no = 0;
+
+			var querystring = "INSERT INTO "+ select +"(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES (" ;
+			 var querystring2 =  ", '" + birth + "','" + firstname + "','" + lastname + "','" + gender + "','" + hire + "')";
+			
+
 			var query = "select emp_no from employees order by emp_no desc limit 1";
 			$.getJSON("/query?select=" + encodeURIComponent(query),function(data){
-				emp(data);
+				emp(data,querystring,querystring2);
+
 			} )
-
-
-
-			/*
-			var querystring = "INSERT INTO "+ select +"(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES (" ;
-			querystring += emp_no + ", '" + birth + "','" + firstname + "','" + lastname + "','" + gender + "','" + hire + "')";
-			alert(querystring);
-			$("#new_employees").load("/query?query=" + encodeURIComponent(querystring));
-			*/
 		}
 	} else if ( select == "departments"){
 		var dept_no = $("#new_departments input[name='dept_no']").val();
