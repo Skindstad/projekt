@@ -156,17 +156,36 @@ button:hover {
 
 
 #content_showEmployees .row1, #content_showEmployees .row2 {
-    grid-template-columns: 6% 20% 15% 15% 10% 17% 17%;
+    grid-template-columns: 8% 18% 15% 15% 10% 17% auto;
 }
 
+#content_showDepartments .row1, #content_showDepartments .row2 {
+    grid-template-columns: 8% 13% auto;
+}
+
+#content_showDeptManager .row1, #content_showDeptManager .row2 {
+    grid-template-columns: 8% 18% 13% 17% auto;
+}
+
+#content_showTitles .row1, #content_showTitles .row2 {
+    grid-template-columns: 8% 18% 18% 17% auto;
+}
+
+#content_showDeptEmp .row1, #content_showDeptEmp .row2 {
+    grid-template-columns: 8% 18% 13% 17% auto;
+}
+
+#content_showSalaries .row1, #content_showSalaries .row2 {
+    grid-template-columns: 8% 18% 13% 17% auto;
+}
 
 #content_show > div ul {
     background: #333;
-    position:absolute;
+    position: absolute;
     top: -5px;
     left: -5px;
     border-radius: 8px;
-    width:100%;
+    width: 100%;
     display: grid;
     grid-template-columns: auto auto auto;
 }
@@ -182,14 +201,8 @@ button:hover {
 }
 
 
-li.x {
-    color: #f00;
-}
-
-li.e {
-    color: #ff0;
-}
-
-li.x:hover, li.e:hover {
-    background: #888;
-}
+li.x {color: #f00;}
+li.e {color: #ff0;}
+li.x:hover, li.e:hover {background: #888;}
+.row1 .F, .row2 .F {color:#f55;}
+.row1 .M, .row2 .M {color: #55f;}
