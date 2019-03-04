@@ -38,12 +38,12 @@ $(document).ready(function () {
     $("#database_table").change(function () {
         var selected = $(this).children("option:selected").val().split("_");
         toggleInsert(selected);
-        if (selected[0]=="dept")
+        if (selected[0] == "dept")
             populateDepartments();
 
     });
 
-    
+
 
     function populateDepartments() {
         var select = $("#dept_no");
@@ -62,136 +62,140 @@ $(document).ready(function () {
 
 
 
-function emp(data,querystring,querystring2) {
-	var emp_no = data.emp_no;
-	$.each(data,function(id,value){
-		$.each(value,function(id,value){
-		//alert(id + "-" + value);
-		emp_no = 1 + value;
-		//alert(emp_no)
-		})
-	})
-	querystring += emp_no + querystring2;
-		//alert(querystring)
-			$("#new_employees").load("/query?query=" + encodeURIComponent(querystring));
-		}
+    function emp(data, querystring, querystring2) {
+        var emp_no = data.emp_no;
+        $.each(data, function (id, value) {
+            $.each(value, function (id, value) {
+                //alert(id + "-" + value);
+                emp_no = 1 + value;
+                //alert(emp_no)
+            })
+        })
+        querystring += emp_no + querystring2;
+        //alert(querystring)
+        $("#new_employees").load("/query?query=" + encodeURIComponent(querystring));
+    }
 
-       // $('#date').datepicker({changeMonth: true, changeYear: true, yearRange: '1950:2021'});
+    // $('#date').datepicker({changeMonth: true, changeYear: true, yearRange: '1950:2021'});
 
-	/* Insert new employees to the database */
-	$("#emp").click(function(e){
-		var select = $("#database_table").val();
-		
-		if(select == "employees"){
-		var emp_no = $("input[name='emp_no']").val();
-		var birth = $("input[type='date'][name='birth']").val();
-		var firstname = $("input:text[name='first']").val();
-		var lastname = $("input:text[name='last']").val();
-		var gender = $("input:radio[name='gender']:checked").val();
-		var hire = $("input[type='date'][name='hire']").val();
+    /* Insert new employees to the database */
+    $("#emp").click(function (e) {
+        var select = $("#database_table").val();
 
-		if (birth == "dd-mm-åååå" || firstname == "" || lastname == "" || hire == "dd-mm-åååå"){
-			alert("please fill all fields!!!!1")
-		} else {
-			var emp_no = 0;
+        if (select == "employees") {
+            var emp_no = $("input[name='emp_no']").val();
+            var birth = $("input[type='date'][name='birth']").val();
+            var firstname = $("input:text[name='first']").val();
+            var lastname = $("input:text[name='last']").val();
+            var gender = $("input:radio[name='gender']:checked").val();
+            var hire = $("input[type='date'][name='hire']").val();
 
-			var querystring = "INSERT INTO "+ select +"(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES (" ;
-			 var querystring2 =  ", '" + birth + "','" + firstname + "','" + lastname + "','" + gender + "','" + hire + "')";
-			
+            if (birth == "dd-mm-åååå" || firstname == "" || lastname == "" || hire == "dd-mm-åååå") {
+                alert("please fill all fields!!!!1")
+            } else {
+                var emp_no = 0;
 
-			var query = "select emp_no from employees order by emp_no desc limit 1";
-			$.getJSON("/query?select=" + encodeURIComponent(query),function(data){
-				emp(data,querystring,querystring2);
-
-			} )
-		}
-	} else if ( select == "departments"){
-		var dept_no = $("#new_departments input[name='dept_no']").val();
-		var dept_N = $("input:text[name='dept_N']").val();
-		if (dept_no == "" || dept_N == ""){
-			alert("please fill all fields!!!!2")
-		} else {
-			//alert(dept_no);
-			if(dept_no >= 1000){
-				alert("dept number have to be only maxlength 3")
-				return;
-			}else {
-			var querystring = "INSERT INTO "+ select +"(dept_no, dept_name) VALUES (" ;
-			querystring +="'d"+ dept_no + "', '" + dept_N +"')";
-			$("#new_departments").load("/query?query=" + encodeURIComponent(querystring));	
-			}
-		}
-        } else if (select == "dept_emp" || select == "dept_manager"){
-		var emp_no = $("input[name='emp_n']").val();
-		var dept_no = $("#dept_no").val();
-		var form_d = $("input[type='date'][name='form_d']").val();
-		var to_d = $("input[type='date'][name='to_d']").val();
-		alert(dept_no)
-		if (emp_no == "" || form_d == "dd-mm-åååå"){
-			alert("please fill all fields!!!!3")
-			}else {
-            if (to_d == "" || !to_d) {
-				to_d = "9999-01-01";
-			}
-			var querystring = "INSERT INTO "+select+"(emp_no ,dept_no, from_date, to_date) VALUES (" ;
-			querystring += emp_no + ",'"+ dept_no + "', '" + form_d +"','"+ to_d +"')";
-			alert(querystring)
-			$("#new_dept").load("/query?query=" + encodeURIComponent(querystring));	
-			
-		}
+                var querystring = "INSERT INTO " + select + "(emp_no, birth_date, first_name, last_name, gender, hire_date) VALUES (";
+                var querystring2 = ", '" + birth + "','" + firstname + "','" + lastname + "','" + gender + "','" + hire + "')";
 
 
-	} else if ( select == "salaries"){
-		var emp_no = $("input[name='emp']").val();
-		var salar = $("input[name='salar']").val();
-		var from = $("input[type='date'][name='from']").val();
-        var to = $("input[type='date'][name='to']").val();
-        if (emp_no == "" || salar == "" || from == "dd-mm-åååå") {
-			alert("please fill all fields!!!!4")
-		} else {
-            if (to == "" || !to){
-				to = "9999-01-01";
+                var query = "select emp_no from employees order by emp_no desc limit 1";
+                $.getJSON("/query?select=" + encodeURIComponent(query), function (data) {
+                    emp(data, querystring, querystring2);
+
+                })
             }
-                var restrict = "SELECT * FROM salaries WHERE emp_no = "+ emp_no +" AND from_date = '" + from +"';";
+        } else if (select == "departments") {
+            var dept_no = $("#new_departments input[name='dept_no']").val();
+            var dept_N = $("input:text[name='dept_N']").val();
+            if (dept_no == "" || dept_N == "") {
+                alert("please fill all fields!!!!2")
+            } else {
+                //alert(dept_no);
+                if (dept_no >= 1000) {
+                    alert("dept number have to be only maxlength 3")
+                    return;
+                } else {
+                    var querystring = "INSERT INTO " + select + "(dept_no, dept_name) VALUES (";
+                    querystring += "'d" + dept_no + "', '" + dept_N + "')";
+                    $("#new_departments").load("/query?query=" + encodeURIComponent(querystring));
+                }
+            }
+        } else if (select == "dept_emp" || select == "dept_manager") {
+            var emp_no = $("input[name='emp_n']").val();
+            var dept_no = $("#dept_no").val();
+            var form_d = $("input[type='date'][name='form_d']").val();
+            var to_d = $("input[type='date'][name='to_d']").val();
+            alert(dept_no)
+            if (emp_no == "" || form_d == "dd-mm-åååå") {
+                alert("please fill all fields!!!!3")
+            } else {
+                if (to_d == "" || !to_d) {
+                    to_d = "9999-01-01";
+                }
+                var querystring = "INSERT INTO " + select + "(emp_no ,dept_no, from_date, to_date) VALUES (";
+                querystring += emp_no + ",'" + dept_no + "', '" + form_d + "','" + to_d + "')";
+                alert(querystring)
+                $("#new_dept").load("/query?query=" + encodeURIComponent(querystring));
+
+            }
+
+
+        } else if (select == "salaries") {
+            var emp_no = $("input[name='emp']").val();
+            var salar = $("input[name='salar']").val();
+            var from = $("input[type='date'][name='from']").val();
+            var to = $("input[type='date'][name='to']").val();
+            if (emp_no == "" || salar == "" || from == "dd-mm-åååå") {
+                alert("please fill all fields!!!!4")
+            } else {
+                if (to == "" || !to) {
+                    to = "9999-01-01";
+                }
+                var newR = 0;
+
+                var restrict = "SELECT * FROM salaries WHERE emp_no = " + emp_no + " AND from_date = '" + from + "';";
                 $.getJSON("/query?select=" + encodeURIComponent(restrict), function (data) {
                     alert(restrict);
                     $.each(data, function (key2 ,val) {
                         alert("i come here in!!!" + val["emp_no"] + "," + val["from_date"])
-                        var newR = new Option(val["emp_no"], val["from_date"]);
+                        newR = new Option(val["emp_no"], val["from_date"]);
                         select.append(newR);
                     });
-                    e.preventDefault;
                 });
-                if(newR > 0 ){
+
+                alert(newR != 0);
+
+                if (newR != 0) {
                     alert("The same person can not get salaries two times the same day");
-            }else{
-			var querystring = "INSERT INTO "+select+"(emp_no ,salary, from_date, to_date) VALUES (" ;
-			querystring += emp_no + ","+ salar + ", '" + from +"','"+ to +"')";
-			alert(querystring)
-            $("#new_salaries").load("/query?query=" + encodeURIComponent(querystring));
+                } else {
+                    var querystring = "INSERT INTO " + select + "(emp_no ,salary, from_date, to_date) VALUES (";
+                    querystring += emp_no + "," + salar + ", '" + from + "','" + to + "')";
+                    alert(querystring)
+                    $("#new_salaries").load("/query?query=" + encodeURIComponent(querystring));
+                }
             }
-		}
-			}else {
-				//alert(select)
-				var emp_no = $("input[name='emp_nu']").val();
-				var title = $("input:text[name='title']").val();
-				var form_date = $("input[type='date'][name='form_date']").val();
-				var to_date = $("input[type='date'][name='to_date']").val();
+        } else {
+            //alert(select)
+            var emp_no = $("input[name='emp_nu']").val();
+            var title = $("input:text[name='title']").val();
+            var form_date = $("input[type='date'][name='form_date']").val();
+            var to_date = $("input[type='date'][name='to_date']").val();
             if (emp_no == "" || title == "" || form_date == "dd-mm-åååå") {
-					alert("please fill all fields!!!!5")
+                alert("please fill all fields!!!!5")
             } else {
                 if (to_date == "" || !to_date) {
-					to_date = "9999-01-01";
-					}
-					var querystring = "INSERT INTO "+select+"(emp_no ,title, from_date, to_date) VALUES (" ;
-					querystring += emp_no + ",'"+ title + "', '" + form_date +"','"+ to_date +"')";
-					alert(querystring)
-					$("#new_titles").load("/query?query=" + encodeURIComponent(querystring));
-				}
-			}
-		
-		e.preventDefault();
-		});
+                    to_date = "9999-01-01";
+                }
+                var querystring = "INSERT INTO " + select + "(emp_no ,title, from_date, to_date) VALUES (";
+                querystring += emp_no + ",'" + title + "', '" + form_date + "','" + to_date + "')";
+                alert(querystring)
+                $("#new_titles").load("/query?query=" + encodeURIComponent(querystring));
+            }
+        }
+
+        e.preventDefault();
+    });
 
 
 
@@ -211,8 +215,8 @@ function emp(data,querystring,querystring2) {
             first_name: "Fornavn:",
             last_name: "Efternavn:",
             gender: "Køn:",
-            birth_date : "Født:",
-            hire_date : "Ansat:"
+            birth_date: "Født:",
+            hire_date: "Ansat:"
         },
 
         showDepartments: {
@@ -255,7 +259,7 @@ function emp(data,querystring,querystring2) {
 
         methods: {
 
-            /* For show employees */            
+            /* For show employees */
             birth_date: function (val) { return val.split("T")[0]; },
             hire_date: function (val) { return val.split("T")[0]; },
             edit_delete: function (val) {
@@ -263,7 +267,7 @@ function emp(data,querystring,querystring2) {
             },
             gender: function (val) { return "<span class=\"" + val + "\">" + val + "</span>"; },
             from_date: function (val) { return val.split("T")[0]; },
-            to_date: function (val) { return val.split("T")[0]; }            
+            to_date: function (val) { return val.split("T")[0]; }
         }
     }
 
@@ -274,11 +278,11 @@ function emp(data,querystring,querystring2) {
         var row = $(elm).parents("div[class^='row']");
         var columnElements = $(row).children("div[class!='edit_delete']");
         var deleteQuery = "";
-        
+
         $.each(columnElements, function (index, elm) {
             if ($(elm).html().indexOf("<") == -1) {
                 deleteQuery += (deleteQuery.length > 0 ? " AND " : "WHERE ")
-                    + "" + $(elm).attr("class") + "='" + $(elm).html().split(": ")[1]+"'";
+                    + "" + $(elm).attr("class") + "='" + $(elm).html().split(": ")[1] + "'";
             }
         });
 
@@ -291,7 +295,7 @@ function emp(data,querystring,querystring2) {
                 alert("An error occured:\n" + data);
         });
     }
-    
+
 
 
     /* Insert the retrieved data */
@@ -302,24 +306,24 @@ function emp(data,querystring,querystring2) {
         //alert(9);
         $.getJSON("/query?select=" + keyQuery, function (data) {
 
-           // alert(data);
+            // alert(data);
         });
 
-        
+
         $.getJSON("/query?select=" + query, function (data) {
             var rows = [];
 
             $.each(data, function (rowNumber, rowValues) {
                 var rowElement = "";
-                
+
                 /* If identifiers are specified - use these, otherwise use provided */
                 if (designColumns[designIdentifier])
                     $.each(designColumns[designIdentifier], function (identifier, value) {
-                        
+
                         /* If a specific function is assigned for an identifier - use returned value */
                         var rowDisplayValue = rowValues[identifier];
                         if (designColumns["methods"][identifier])
-                            rowDisplayValue = designColumns["methods"][identifier](rowValues[identifier]); 
+                            rowDisplayValue = designColumns["methods"][identifier](rowValues[identifier]);
 
                         rowElement += "<div class=\"" + identifier + "\" title=\"" + rowValues[identifier] + "\">" + value + " " + rowDisplayValue + "</div>";
                     });
