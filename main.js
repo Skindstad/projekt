@@ -274,7 +274,7 @@ $(document).ready(function () {
 
 
     /* Assign show/delete/update onclick's */
-    $.each(designObject.hrefs, function (href, query) {
+    $.each(designObject.liHrefs, function (href, query) {
         var splitQuery = query.split(", ");
         $("li[href='?" + href + "']").click(function () {
             var query = encodeURIComponent(splitQuery[0]);
@@ -286,6 +286,12 @@ $(document).ready(function () {
 
 /* Show selected content, start at employees view */
 function toggleShow(elmVisible, query, table) {
+
+    /* Used to refresh current viewed items */
+    designObject.lastToggleShow.elmVisible = elmVisible;
+    designObject.lastToggleShow.query = query;
+    designObject.lastToggleShow.table = table;
+    
     $("#content_show").css("display", "block");
     $("#content_show > div[class!='limiter']").css("display", "none");
     $("#content_" + elmVisible).css("display", "block");
@@ -295,12 +301,17 @@ function toggleShow(elmVisible, query, table) {
     insertData(query, elmVisible, table);
 }
 
-
-
-
 /* Design object*/
 var designObject = {
-    hrefs: {
+
+    lastToggleShow: {
+        elmVisible: "",
+        query: "",
+        table: "",
+        init: function () { toggleShow(this.elmVisible, this.query, this.table) }
+    },
+
+    liHrefs: {
         showEmployees: "SELECT * FROM employees LIMIT 10, employees",
         showDepartments: "SELECT * FROM departments LIMIT 10, departments",
         showDeptManager: "SELECT * FROM dept_manager LIMIT 10, dept_manager",
@@ -309,62 +320,34 @@ var designObject = {
         showSalaries: "SELECT * FROM salaries LIMIT 10, salaries"
     },
 
-    /* Order of columns and visible columns - start */
-    showEmployees: {
-        edit_delete: "",
+    /* Order of columns and visible columns */
+    showEmployees: ["edit_delete", "emp_no", "first_name", "last_name", "gender", "birth_date", "hire_date"],
+    showDepartments: ["edit_delete", "dept_no", "dept_name"],
+    showDeptManager: ["edit_delete", "emp_no", "dept_no", "from_date", "to_date"],
+    showTitles: ["edit_delete", "emp_no", "title", "from_date", "to_date"],
+    showDeptEmp: ["edit_delete", "emp_no", "dept_no", "from_date", "to_date"],
+    showSalaries: ["edit_delete", "emp_no", "salary", "from_date", "to_date"],
+
+    translations: {
         emp_no: "Medarbejder nr.:",
+        dept_no: "Afdelings nr.:",
+        dept_name: "Afdeling:",
         first_name: "Fornavn:",
         last_name: "Efternavn:",
         gender: "Køn:",
+        title: "Stilling:",
+        salary: "Lønning:",
         birth_date: "Født:",
-        hire_date: "Ansat:"
-    },
-
-    showDepartments: {
-        edit_delete: "",
-        dept_no: "Afdelings nr.:",
-        dept_name: "Afdelings navn:"
-    },
-
-    showDeptManager: {
-        edit_delete: "",
-        emp_no: "Medarbejder nr.:",
-        dept_no: "Afdelings nr.:",
+        hire_date: "Ansat:",
         from_date: "Fra dato:",
         to_date: "Til dato:"
     },
-
-    showTitles: {
-        edit_delete: "",
-        emp_no: "Medarbejder nr.:",
-        title: "Titel:",
-        from_date: "Fra dato:",
-        to_date: "Til dato:"
-    },
-
-    showDeptEmp: {
-        edit_delete: "",
-        emp_no: "Medarbejder nr.:",
-        dept_no: "Afdelings nr.:",
-        from_date: "Fra dato:",
-        to_date: "Til dato:"
-    },
-
-    showSalaries: {
-        edit_delete: "",
-        emp_no: "Medarbejder nr.:",
-        salary: "Løn:",
-        from_date: "Fra dato:",
-        to_date: "Til dato:"
-    },
-    /* Order of columns and visible columns - end */
 
     /* Used to change content based on column names */
     methods: {
         birth_date: function (val) { return val.split("T")[0]; },
         hire_date: function (val) { return val.split("T")[0]; },
         edit_delete: function (val) {
-            //<li><input type=\"checkbox\"></li>
             return "<ul><li class=\"x\" title=\"Slet\">S</li><li class=\"e\" title=\"Ændre\">Æ</li></ul>";
         },
         gender: function (val) { return "<span class=\"" + val + "\">" + val + "</span>"; },
@@ -388,40 +371,52 @@ var designObject = {
 
 /* Insert the retrieved data */
 function insertData(query, designIdentifier, table) {
-    $.getJSON("/query?select=" + query, function (data) {
-        var rows = [];
 
-        $.each(data, function (rowNumber, rowValues) {
-            var rowElement = "";
+    var count = "SELECT COUNT(*) AS \"Total\" FROM " + table;
+    $.getJSON("/query?select=" + encodeURIComponent(count), function (data) {
+        var total = data[0]["Total"];
 
-            /* If identifiers are specified - use these, otherwise use provided */
-            if (designObject[designIdentifier])
-                $.each(designObject[designIdentifier], function (identifier, value) {
+
+
+
+        $.getJSON("/query?select=" + query, function (data) {
+
+            var amount = unescape(query).split("LIMIT ")[1].split(" ")[0];
+            var offset = unescape(query).split("OFFSET ")[1] ? unescape(query).split("OFFSET ")[1] : 1;
+            var toTarget = parseInt(offset) - 1 + parseInt(amount);
+
+
+            $(".limiter").html("Showing: " + offset + " to " + (toTarget > total ? total : toTarget ) + " out of " + total);
+
+            var rows = [];
+
+            $.each(data, function (rowNumber, rowValues) {
+                var rowElement = "";
+
+                $.each(designObject[designIdentifier], function (keyNumber, identifier) {
+                    var rowDisplayValue = rowValues[identifier];
 
                     /* If a specific function is assigned for an identifier - use returned value */
-                    var rowDisplayValue = rowValues[identifier];
                     if (designObject.methods[identifier])
                         rowDisplayValue = designObject.methods[identifier](rowValues[identifier]);
 
-                    rowElement += "<div class=\"" + identifier + "\" title=\"" + rowValues[identifier] + "\">" + value + " " + rowDisplayValue + "</div>";
-                });
-            else
-                $.each(rowValues, function (identifier, value) {
-                    rowElement += "<div class=\"" + identifier + "\">" + identifier + " " + value + "</div>";
+                    rowElement += "<div class=\"" + identifier + "\" title=\"" + rowValues[identifier] + "\">" + designObject.translations[identifier] + " " + rowDisplayValue + "</div>";
                 });
 
-            rows.push("<div class=\"row" + ((rows.length % 2) + 1) + "\">" + rowElement + "</div>");
+                rows.push("<div class=\"row" + ((rows.length % 2) + 1) + "\">" + rowElement + "</div>");
+            });
+
+            $("#contentData_" + designIdentifier).html(rows.join(""));
+
+            /* Assign deletion method */
+            $("#contentData_" + designIdentifier + " .x").click(function () {
+                deleteRow(table, this);
+            })
+            $("#contentData_" + designIdentifier + " .e").click(function () {
+                changeName(table, this);
+            })
         });
 
-        $("#contentData_" + designIdentifier).html(rows.join(""));
-
-        /* Assign deletion method */
-        $("#contentData_" + designIdentifier + " .x").click(function () {
-            deleteRow(table, this);
-        })
-        $("#contentData_" + designIdentifier + " .e").click(function () {
-            changeName(table, this);
-        })
     });
 }
 
@@ -445,7 +440,7 @@ function deleteRow(table, elm) {
     if (deletionChoice)
         $.get("/query?query=" + deleteQuery, function (data) {
             if (data == "Success")
-                $(row).fadeOut(2000, function () { $(this).remove(); });
+                $(row).fadeOut(2000, function () { designObject.lastToggleShow.init(); });
             else
                 alert("An error occured:\n" + data);
         });
@@ -458,6 +453,9 @@ function changeName(table, elm) {
     var row = $(elm).parents("div[class^='row']");
     var columnElements = $(row).children("div[class!='edit_delete']");
     var changeQuery = "";
+
+    if ($(row).children("div[class='edit_delete']").children(".update").length > 0)
+        return;
 
     /* Do not allow changes on primary keys */
     /* TODO: Consider looking at all items with foreign keys also */
@@ -517,9 +515,12 @@ function changeName(table, elm) {
             });
 
             updateQuery = "UPDATE " + table + " SET " + updateQuery + " WHERE " + identifyQuery;
-            alert(updateQuery);
-            $.get("/query?query=" + updateQuery);
-            $(row).remove();
+            if (confirm(updateQuery)) {
+                $.get("/query?query=" + updateQuery, function () {
+                    designObject.lastToggleShow.init();
+                });
+            }
+
         });
 
         $(row).children("div[class='edit_delete']").append(update);
