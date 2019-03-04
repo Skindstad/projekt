@@ -193,7 +193,6 @@ $(document).ready(function () {
                 $("#new_titles").load("/query?query=" + encodeURIComponent(querystring));
             }
         }
-
         e.preventDefault();
     });
 
