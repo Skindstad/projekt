@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
     /* Menu bar - title-, page- and button_background- change */
-    $("#sidebar li").click(function () {
-        $("#sidebar li").attr("class", "");
+    $("#sidebar li[href]").click(function () {
+        $("#sidebar li[href]").attr("class", "");
         $(this).attr("class", "selected");
 
         $("#content > div").css("display", "none");
@@ -258,46 +258,52 @@ function emp(data,querystring,querystring2) {
 
     /* Delete single row */
     function deleteRow(table, elm) {
-        var columnElements = $(elm).parents("div[class^='row']").children("div[class!='edit_delete']");
-        /*columnElements.each( => {
-            alert(this);
-        });*/
+        var row = $(elm).parents("div[class^='row']");
+        var columnElements = $(row).children("div[class!='edit_delete']");
+        var deleteQuery = "";
+        
+        $.each(columnElements, function (index, elm) {
+            if ($(elm).html().indexOf("<") == -1) {
+                deleteQuery += (deleteQuery.length > 0 ? " AND " : "WHERE ")
+                    + "" + $(elm).attr("class") + "='" + $(elm).html().split(": ")[1] + "'";
+            }
+        });
 
-        var identifier = row.children("div:nth-child(2)");
-        alert(row.html());
-
-        /*
-
-        var columnIdentifier = identifier.attr("class");
-        var columnValue = identifier.text().split(": ")[1];
-
-        var query = "DELETE FROM " + table + " WHERE " + columnIdentifier + "='" + columnValue + "' AND ";
-        */
-
-        //$.getJSON("/query?query=" + query);
-        //alert(query);
-       // $(row).fadeOut(2000, function(){ $(this).remove(); });
+        deleteQuery = "DELETE FROM " + table + " " + deleteQuery;
+        alert(deleteQuery);
+        $.getJSON("/query?query=" + deleteQuery);
+        $(row).fadeOut(2000, function(){ $(this).remove(); });
     }
     
 
 
     /* Insert the retrieved data */
     function insertData(query, designIdentifier, table) {
+
+        var keyQuery = "SHOW KEYS FROM salaries WHERE Key_name = \"PRIMARY\"";
+
+        //alert(9);
+        $.getJSON("/query?select=" + keyQuery, function (data) {
+
+           // alert(data);
+        });
+        
         $.getJSON("/query?select=" + query, function (data) {
             var rows = [];
 
             $.each(data, function (rowNumber, rowValues) {
                 var rowElement = "";
-
+                
                 /* If identifiers are specified - use these, otherwise use provided */
                 if (designColumns[designIdentifier])
                     $.each(designColumns[designIdentifier], function (identifier, value) {
-
+                        
                         /* If a specific function is assigned for an identifier - use returned value */
+                        var rowDisplayValue = rowValues[identifier];
                         if (designColumns["methods"][identifier])
-                            rowValues[identifier] = designColumns["methods"][identifier](rowValues[identifier]);
+                            rowDisplayValue = designColumns["methods"][identifier](rowValues[identifier]); 
 
-                        rowElement += "<div class=\"" + identifier + "\">" + value + " " + rowValues[identifier] + "</div>";
+                        rowElement += "<div class=\"" + identifier + "\" title=\"" + rowValues[identifier] + "\">" + value + " " + rowDisplayValue + "</div>";
                     });
                 else
                     $.each(rowValues, function (identifier, value) {
