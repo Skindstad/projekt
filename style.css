@@ -93,14 +93,14 @@ button{
     margin: 0 auto!important;
     font-size: 20px;
     border-radius: 2px;
-    background-color: gray;
+    background-color: green;
 }
 button:hover {
-    background-color: black;
+    background-color: red;
     color: white;
 }
-.w60 {
-    width: 60%!important;
+table{
+    width: max-content;
 }
 
 
