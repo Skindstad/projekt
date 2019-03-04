@@ -157,7 +157,7 @@ $(document).ready(function () {
 
                     var newR = 0;
 
-                    $.each(data, function (key2 ,val) {
+                    $.each(data, function (key2, val) {
                         newR = 1;
                     });
 
@@ -187,23 +187,24 @@ $(document).ready(function () {
                 if (to_date == "" || !to_date) {
                     to_date = "9999-01-01";
                 }
-                    var restrict = "SELECT * FROM salaries WHERE emp_no = " + emp_no + " AND title = '" + title +"' AND from_date = '" + from + "';";
-                    $.getJSON("/query?select=" + encodeURIComponent(restrict), function (data) {
-    
-                        var newR = 0;
-    
-                        $.each(data, function (key2 ,val) {
-                            newR = 1;
-                        });
+                var restrict = "SELECT * FROM salaries WHERE emp_no = " + emp_no + " AND title = '" + title + "' AND from_date = '" + from + "';";
+                $.getJSON("/query?select=" + encodeURIComponent(restrict), function (data) {
+
+                    var newR = 0;
+
+                    $.each(data, function (key2, val) {
+                        newR = 1;
+                    });
                     if (newR != 0) {
                         alert("The same person can not get salaries two times the same day");
                     } else {
-                var querystring = "INSERT INTO " + select + "(emp_no ,title, from_date, to_date) VALUES (";
-                querystring += emp_no + ",'" + title + "', '" + form_date + "','" + to_date + "')";
-                alert(querystring)
-                $("#new_titles").load("/query?query=" + encodeURIComponent(querystring));
+                        var querystring = "INSERT INTO " + select + "(emp_no ,title, from_date, to_date) VALUES (";
+                        querystring += emp_no + ",'" + title + "', '" + form_date + "','" + to_date + "')";
+                        alert(querystring)
+                        $("#new_titles").load("/query?query=" + encodeURIComponent(querystring));
+                    }
+                });
             }
-        });
         }
         e.preventDefault();
     });
