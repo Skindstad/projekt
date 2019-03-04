@@ -308,11 +308,18 @@ $(document).ready(function () {
                 return "<ul><li><input type=\"checkbox\"></li><li class=\"x\" title=\"Slet\">S</li><li class=\"e\" title=\"Ændre\">Æ</li></ul>";
             },
             gender: function (val) { return "<span class=\"" + val + "\">" + val + "</span>"; },
+            raw_gender: function (val) { return val.split(">")[1].split("<")[0];},
             from_date: function (val) { return val.split("T")[0]; },
             to_date: function (val) { return val.split("T")[0]; }
+        },
+
+        datetimes: {
+            from_date: true,
+            to_date: true,
+            hire_date: true,
+            birth_date: true
         }
     }
-
 
 
     /* Delete single row */
@@ -342,18 +349,83 @@ $(document).ready(function () {
 
 
 
+    function changeName(table, elm) {
+
+        var row = $(elm).parents("div[class^='row']");
+        var columnElements = $(row).children("div[class!='edit_delete']");
+        var changeQuery = "";
+
+        /* Do not allow changes on primary keys */
+        /* TODO: Consider looking at all items with foreign keys also */
+        var keyQuery = "SELECT column_name " +
+            "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE " +
+            "WHERE table_schema = 'employees' AND table_name = '" + table + "' AND constraint_name = 'PRIMARY'";
+        
+        $.getJSON("/query?select=" + encodeURIComponent(keyQuery), function (data) {
+            var excludedFromChange = [];
+            var updateQuery = "";
+
+            $.each(data, function (rowNumber, primaryColumns) {
+                excludedFromChange.push(primaryColumns["column_name"]);
+            });
+            
+            $.each(columnElements, function (elmNumber, columnElm) {
+                var columnName = $(columnElm).attr("class");
+
+                /* De-convert the values from the database */
+                var rawValue = $(columnElm).html().split(": ");
+                if (designColumns["methods"]["raw_" + columnName])
+                    rawValue[1] = designColumns["methods"]["raw_" + columnName](rawValue[1]);
+
+                if (!excludedFromChange.includes(columnName)) {
+                    var dataType = designColumns["datetimes"][columnName] ? "date" : "text";
+                    rawValue[1] = "<input type=\"" + dataType + "\" class=\"editable\" value=\"" + rawValue[1] + "\">";
+                } else {
+                    updateQuery += (updateQuery.length > 0 ? " AND " : "WHERE ") +
+                        columnName + "='" + rawValue[1] + "'";
+                }
+                $(columnElm).html(rawValue.join(": "));
+            });
+
+            /* Update the values in the database */
+            var update = $("<div></div>");
+            update.text("UPDATE");
+            update.attr("class", "update");
+            update.click(function () {
+
+                var updateQuery = "";
+                var identifyQuery = "";
+
+                $.each(columnElements, function (elmNumber, columnElm) {
+                    var columnName = $(columnElm).attr("class");
+
+                    if (!excludedFromChange.includes(columnName)) {
+                        var rawValueElm = $(columnElm).children("input");
+                        if (rawValueElm.val() != undefined) {
+                            var newRawValue = rawValueElm.val();
+                            updateQuery += (updateQuery.length > 0 ? ", " : "") +
+                                columnName + "='" + newRawValue + "'";
+                        }
+                    } else {
+                        identifyQuery += (identifyQuery.length > 0 ? " AND " : "") +
+                            columnName + "='" + $(columnElm).html().split(": ")[1] + "'";
+                    }
+                });
+
+                updateQuery = "UPDATE " + table + " SET " + updateQuery + " WHERE " + identifyQuery;
+                alert(updateQuery);
+                $.get("/query?query=" + updateQuery);
+                $(row).remove();
+            });
+
+            $(row).children("div[class='edit_delete']").append(update);
+
+        });
+    }
+
+
     /* Insert the retrieved data */
     function insertData(query, designIdentifier, table) {
-
-        var keyQuery = "SHOW KEYS FROM salaries WHERE Key_name = \"PRIMARY\"";
-
-        //alert(9);
-        $.getJSON("/query?select=" + encodeURIComponent(keyQuery), function (data) {
-
-            alert(1);
-        });
-
-
         $.getJSON("/query?select=" + query, function (data) {
             var rows = [];
 
@@ -384,6 +456,9 @@ $(document).ready(function () {
             /* Assign deletion method */
             $("#contentData_" + designIdentifier + " .x").click(function () {
                 deleteRow(table, this);
+            })
+            $("#contentData_" + designIdentifier + " .e").click(function () {
+                changeName(table, this);
             })
         });
     }

@@ -67,7 +67,6 @@ ul#sidebar > li.header:hover {
 }
 
 
-}
 form{
     width: auto;
     margin-left: 2%;
@@ -154,6 +153,17 @@ button:hover {
     grid-template-columns: auto auto auto auto auto;
 }
 
+
+.row1 div, .row2 div {
+    position: relative;
+    padding: 0 5px 0 0;
+}
+
+.row1 .edit_delete, .row2 .edit_delete {
+    position: relative;
+    padding: 0;
+}
+
 .row1 {
     background: #999;
 }
@@ -217,3 +227,22 @@ li.e {color: #ff0;}
 li.x:hover, li.e:hover {background: #888;}
 .row1 .F, .row2 .F {color:#f55;}
 .row1 .M, .row2 .M {color: #55f;}
+
+input.editable {
+    width:100%!important;
+}
+
+.update {
+    position:absolute;
+    top:28px;
+    left:-5px;
+    padding: 2px 20px;
+    border-radius:5px;
+    background: #5f5;
+    cursor:pointer;
+    text-align:center;
+}
+
+.update:hover {
+    background: #0a0;
+}
