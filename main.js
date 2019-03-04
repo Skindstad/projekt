@@ -76,7 +76,7 @@ function emp(data,querystring,querystring2) {
 			$("#new_employees").load("/query?query=" + encodeURIComponent(querystring));
 		}
 
-
+       // $('#date').datepicker({changeMonth: true, changeYear: true, yearRange: '1950:2021'});
 
 	/* Insert new employees to the database */
 	$("#emp").click(function(e){
@@ -145,21 +145,34 @@ function emp(data,querystring,querystring2) {
 		var emp_no = $("input[name='emp']").val();
 		var salar = $("input[name='salar']").val();
 		var from = $("input[type='date'][name='from']").val();
-		var to = $("input[type='date'][name='to']").val();
-		alert(salar)
+        var to = $("input[type='date'][name='to']").val();
         if (emp_no == "" || salar == "" || from == "dd-mm-åååå") {
 			alert("please fill all fields!!!!4")
 		} else {
             if (to == "" || !to){
 				to = "9999-01-01";
             }
+                var restrict = "SELECT * FROM salaries WHERE emp_no = "+ emp_no +" AND from_date = '" + from +"';";
+                $.getJSON("/query?select=" + encodeURIComponent(restrict), function (data) {
+                    alert(restrict);
+                    $.each(data, function (key2 ,val) {
+                        alert("i come here in!!!" + val["emp_no"] + "," + val["from_date"])
+                        var newR = new Option(val["emp_no"], val["from_date"]);
+                        select.append(newR);
+                    });
+                    e.preventDefault;
+                });
+                if(newR > 0 ){
+                    alert("The same person can not get salaries two times the same day");
+            }else{
 			var querystring = "INSERT INTO "+select+"(emp_no ,salary, from_date, to_date) VALUES (" ;
 			querystring += emp_no + ","+ salar + ", '" + from +"','"+ to +"')";
 			alert(querystring)
-			$("#new_salaries").load("/query?query=" + encodeURIComponent(querystring));
+            $("#new_salaries").load("/query?query=" + encodeURIComponent(querystring));
+            }
 		}
 			}else {
-				alert(select)
+				//alert(select)
 				var emp_no = $("input[name='emp_nu']").val();
 				var title = $("input:text[name='title']").val();
 				var form_date = $("input[type='date'][name='form_date']").val();
