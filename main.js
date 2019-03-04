@@ -265,14 +265,18 @@ function emp(data,querystring,querystring2) {
         $.each(columnElements, function (index, elm) {
             if ($(elm).html().indexOf("<") == -1) {
                 deleteQuery += (deleteQuery.length > 0 ? " AND " : "WHERE ")
-                    + "" + $(elm).attr("class") + "='" + $(elm).html().split(": ")[1] + "'";
+                    + "" + $(elm).attr("class") + "='" + $(elm).html().split(": ")[1]+"'";
             }
         });
 
         deleteQuery = "DELETE FROM " + table + " " + deleteQuery;
         alert(deleteQuery);
-        $.getJSON("/query?query=" + deleteQuery);
-        $(row).fadeOut(2000, function(){ $(this).remove(); });
+        $.get("/query?query=" + deleteQuery, function (data) {
+            if (data == "Success")
+                $(row).fadeOut(2000, function () { $(this).remove(); });
+            else
+                alert("An error occured:\n" + data);
+        });
     }
     
 
@@ -287,6 +291,7 @@ function emp(data,querystring,querystring2) {
 
            // alert(data);
         });
+
         
         $.getJSON("/query?select=" + query, function (data) {
             var rows = [];
