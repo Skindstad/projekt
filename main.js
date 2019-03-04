@@ -152,28 +152,28 @@ $(document).ready(function () {
                 if (to == "" || !to) {
                     to = "9999-01-01";
                 }
-                var newR = 0;
-
                 var restrict = "SELECT * FROM salaries WHERE emp_no = " + emp_no + " AND from_date = '" + from + "';";
                 $.getJSON("/query?select=" + encodeURIComponent(restrict), function (data) {
-                    alert(restrict);
-                /*    $.each(data, function (key2 ,val) {
-                        alert("i come here in!!!" + val["emp_no"] + "," + val["from_date"])
-                        newR = new Option(val["emp_no"], val["from_date"]);
-                        select.append(newR);
+
+                    var newR = 0;
+
+                    $.each(data, function (key2 ,val) {
+                        newR = 1;
                     });
+
+
+                    if (newR != 0) {
+                        alert("The same person can not get salaries two times the same day");
+                    } else {
+                        var querystring = "INSERT INTO " + select + "(emp_no ,salary, from_date, to_date) VALUES (";
+                        querystring += emp_no + "," + salar + ", '" + from + "','" + to + "')";
+                        alert(querystring)
+                        $("#new_salaries").load("/query?query=" + encodeURIComponent(querystring));
+                    }
+
                 });
 
-                alert(newR != 0);
 
-                if (newR != 0) {
-                    alert("The same person can not get salaries two times the same day");
-                } else {
-                    var querystring = "INSERT INTO " + select + "(emp_no ,salary, from_date, to_date) VALUES (";
-                    querystring += emp_no + "," + salar + ", '" + from + "','" + to + "')";
-                    alert(querystring)
-                    $("#new_salaries").load("/query?query=" + encodeURIComponent(querystring));
-                }
             }
         } else {
             //alert(select)
