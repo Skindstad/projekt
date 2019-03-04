@@ -111,35 +111,60 @@ $(document).ready(function () {
             if (dept_no == "" || dept_N == "") {
                 alert("please fill all fields!!!!2")
             } else {
-                //alert(dept_no);
                 if (dept_no >= 1000) {
                     alert("dept number have to be only maxlength 3")
                     return;
                 } else {
+                    var restrict = "SELECT * FROM departments WHERE dept_no = '" + dept_no +"';";
+                    $.getJSON("/query?select=" + encodeURIComponent(restrict), function (data) {
+    
+                        var newR = 0;
+    
+                        $.each(data, function (key5, val) {
+                            newR = 1;
+                        });
+                        if (newR != 0) {
+                            alert("The same department cannot have to numbers");
+                        } else {
                     var querystring = "INSERT INTO " + select + "(dept_no, dept_name) VALUES (";
                     querystring += "'d" + dept_no + "', '" + dept_N + "')";
                     $("#new_departments").load("/query?query=" + encodeURIComponent(querystring));
                 }
+            });
             }
+        }
         } else if (select == "dept_emp" || select == "dept_manager") {
             var emp_no = $("input[name='emp_n']").val();
             var dept_no = $("#dept_no").val();
             var form_d = $("input[type='date'][name='form_d']").val();
             var to_d = $("input[type='date'][name='to_d']").val();
-            alert(dept_no)
             if (emp_no == "" || form_d == "dd-mm-åååå") {
                 alert("please fill all fields!!!!3")
             } else {
                 if (to_d == "" || !to_d) {
                     to_d = "9999-01-01";
                 }
+                var restrict = "SELECT * FROM "+ select +" WHERE emp_no = " + emp_no +";";
+                $.getJSON("/query?select=" + encodeURIComponent(restrict), function (data) {
+
+                    var newR = 0;
+
+                    $.each(data, function (key4, val) {
+                        newR = 1;
+                    });
+
+
+                    if (newR != 0) {
+                        alert("The same person can not be in two department a same time");
+                    } else {
                 var querystring = "INSERT INTO " + select + "(emp_no ,dept_no, from_date, to_date) VALUES (";
                 querystring += emp_no + ",'" + dept_no + "', '" + form_d + "','" + to_d + "')";
                 alert(querystring)
                 $("#new_dept").load("/query?query=" + encodeURIComponent(querystring));
 
             }
-
+        });
+    }
 
         } else if (select == "salaries") {
             var emp_no = $("input[name='emp']").val();
@@ -170,37 +195,32 @@ $(document).ready(function () {
                         alert(querystring)
                         $("#new_salaries").load("/query?query=" + encodeURIComponent(querystring));
                     }
-
                 });
-
-
             }
         } else {
-            //alert(select)
             var emp_no = $("input[name='emp_nu']").val();
             var title = $("input:text[name='title']").val();
-            var form_date = $("input[type='date'][name='form_date']").val();
+            var from_date = $("input[type='date'][name='from_date']").val();
             var to_date = $("input[type='date'][name='to_date']").val();
-            if (emp_no == "" || title == "" || form_date == "dd-mm-åååå") {
-                alert("please fill all fields!!!!5")
+            if (emp_no == "" || title == "" || from_date == "dd-mm-åååå") {
+                alert("please fill all fields!!!!5");
             } else {
+                alert("1")
                 if (to_date == "" || !to_date) {
                     to_date = "9999-01-01";
                 }
-                var restrict = "SELECT * FROM salaries WHERE emp_no = " + emp_no + " AND title = '" + title + "' AND from_date = '" + from + "';";
+                var restrict = "SELECT * FROM titles WHERE emp_no = " + emp_no + " AND title = '" + title + "';";
                 $.getJSON("/query?select=" + encodeURIComponent(restrict), function (data) {
-
                     var newR = 0;
 
-                    $.each(data, function (key2, val) {
+                    $.each(data, function (key3, val) {
                         newR = 1;
                     });
                     if (newR != 0) {
-                        alert("The same person can not get salaries two times the same day");
+                        alert("The same person can not have two titles a the same time");
                     } else {
                         var querystring = "INSERT INTO " + select + "(emp_no ,title, from_date, to_date) VALUES (";
-                        querystring += emp_no + ",'" + title + "', '" + form_date + "','" + to_date + "')";
-                        alert(querystring)
+                        querystring += emp_no + ",'" + title + "', '" + from_date + "','" + to_date + "')";
                         $("#new_titles").load("/query?query=" + encodeURIComponent(querystring));
                     }
                 });
