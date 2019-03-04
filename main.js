@@ -1,3 +1,5 @@
+"use strict";
+
 $(document).ready(function () {
 
     /* Menu bar - title-, page- and button_background- change */
@@ -219,6 +221,34 @@ $(document).ready(function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /* Design    */
     var designColumns = {
         showEmployees: {
@@ -299,13 +329,15 @@ $(document).ready(function () {
         });
 
         deleteQuery = "DELETE FROM " + table + " " + deleteQuery;
-        alert(deleteQuery);
-        $.get("/query?query=" + deleteQuery, function (data) {
-            if (data == "Success")
-                $(row).fadeOut(2000, function () { $(this).remove(); });
-            else
-                alert("An error occured:\n" + data);
-        });
+        var deletionChoice = confirm(deleteQuery);
+
+        if (deletionChoice)
+            $.get("/query?query=" + deleteQuery, function (data) {
+                if (data == "Success")
+                    $(row).fadeOut(2000, function () { $(this).remove(); });
+                else
+                    alert("An error occured:\n" + data);
+            });
     }
 
 
@@ -316,9 +348,9 @@ $(document).ready(function () {
         var keyQuery = "SHOW KEYS FROM salaries WHERE Key_name = \"PRIMARY\"";
 
         //alert(9);
-        $.getJSON("/query?select=" + keyQuery, function (data) {
+        $.getJSON("/query?select=" + encodeURIComponent(keyQuery), function (data) {
 
-            // alert(data);
+            alert(1);
         });
 
 
