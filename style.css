@@ -208,7 +208,7 @@ table{
     border-radius: 8px;
     width: 100%;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto;
 }
 
 
@@ -236,7 +236,7 @@ input.editable {
     position:absolute;
     top:28px;
     left:-5px;
-    padding: 2px 20px;
+    padding: 2px 20px!important;
     border-radius:5px;
     background: #5f5;
     cursor:pointer;

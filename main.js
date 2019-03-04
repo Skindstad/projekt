@@ -269,265 +269,260 @@ $(document).ready(function () {
 
 
 
-    /* Design    */
-    var designColumns = {
-        showEmployees: {
-            edit_delete: "",
-            emp_no: "Medarbejder nr.:",
-            first_name: "Fornavn:",
-            last_name: "Efternavn:",
-            gender: "Køn:",
-            birth_date: "Født:",
-            hire_date: "Ansat:"
+
+
+
+
+    /* Assign show/delete/update onclick's */
+    $.each(designObject.hrefs, function (href, query) {
+        var splitQuery = query.split(", ");
+        $("li[href='?" + href + "']").click(function () {
+            var query = encodeURIComponent(splitQuery[0]);
+            var table = splitQuery[1];
+            toggleShow(href, query, table);
+        });
+    });
+});
+
+/* Show selected content, start at employees view */
+function toggleShow(elmVisible, query, table) {
+    $("#content_show").css("display", "block");
+    $("#content_show > div[class!='limiter']").css("display", "none");
+    $("#content_" + elmVisible).css("display", "block");
+
+    $("#content_show > ul > li").attr("class", "");
+    $("li[href='?" + elmVisible + "']").attr("class", "selected");
+    insertData(query, elmVisible, table);
+}
+
+
+
+
+/* Design object*/
+var designObject = {
+    hrefs: {
+        showEmployees: "SELECT * FROM employees LIMIT 10, employees",
+        showDepartments: "SELECT * FROM departments LIMIT 10, departments",
+        showDeptManager: "SELECT * FROM dept_manager LIMIT 10, dept_manager",
+        showTitles: "SELECT * FROM titles LIMIT 10, titles",
+        showDeptEmp: "SELECT * FROM dept_emp LIMIT 10, dept_emp",
+        showSalaries: "SELECT * FROM salaries LIMIT 10, salaries"
+    },
+
+    /* Order of columns and visible columns - start */
+    showEmployees: {
+        edit_delete: "",
+        emp_no: "Medarbejder nr.:",
+        first_name: "Fornavn:",
+        last_name: "Efternavn:",
+        gender: "Køn:",
+        birth_date: "Født:",
+        hire_date: "Ansat:"
+    },
+
+    showDepartments: {
+        edit_delete: "",
+        dept_no: "Afdelings nr.:",
+        dept_name: "Afdelings navn:"
+    },
+
+    showDeptManager: {
+        edit_delete: "",
+        emp_no: "Medarbejder nr.:",
+        dept_no: "Afdelings nr.:",
+        from_date: "Fra dato:",
+        to_date: "Til dato:"
+    },
+
+    showTitles: {
+        edit_delete: "",
+        emp_no: "Medarbejder nr.:",
+        title: "Titel:",
+        from_date: "Fra dato:",
+        to_date: "Til dato:"
+    },
+
+    showDeptEmp: {
+        edit_delete: "",
+        emp_no: "Medarbejder nr.:",
+        dept_no: "Afdelings nr.:",
+        from_date: "Fra dato:",
+        to_date: "Til dato:"
+    },
+
+    showSalaries: {
+        edit_delete: "",
+        emp_no: "Medarbejder nr.:",
+        salary: "Løn:",
+        from_date: "Fra dato:",
+        to_date: "Til dato:"
+    },
+    /* Order of columns and visible columns - end */
+
+    /* Used to change content based on column names */
+    methods: {
+        birth_date: function (val) { return val.split("T")[0]; },
+        hire_date: function (val) { return val.split("T")[0]; },
+        edit_delete: function (val) {
+            //<li><input type=\"checkbox\"></li>
+            return "<ul><li class=\"x\" title=\"Slet\">S</li><li class=\"e\" title=\"Ændre\">Æ</li></ul>";
         },
+        gender: function (val) { return "<span class=\"" + val + "\">" + val + "</span>"; },
+        raw_gender: function (val) { return val.split(">")[1].split("<")[0]; },
+        from_date: function (val) { return val.split("T")[0]; },
+        to_date: function (val) { return val.split("T")[0]; }
+    },
 
-        showDepartments: {
-            edit_delete: "",
-            dept_no: "Afdelings nr.:",
-            dept_name: "Afdelings navn:"
-        },
-
-        showDeptManager: {
-            edit_delete: "",
-            emp_no: "Medarbejder nr.:",
-            dept_no: "Afdelings nr.:",
-            from_date: "Fra dato:",
-            to_date: "Til dato:"
-        },
-
-        showTitles: {
-            edit_delete: "",
-            emp_no: "Medarbejder nr.:",
-            title: "Titel:",
-            from_date: "Fra dato:",
-            to_date: "Til dato:"
-        },
-
-        showDeptEmp: {
-            edit_delete: "",
-            emp_no: "Medarbejder nr.:",
-            dept_no: "Afdelings nr.:",
-            from_date: "Fra dato:",
-            to_date: "Til dato:"
-        },
-
-        showSalaries: {
-            edit_delete: "",
-            emp_no: "Medarbejder nr.:",
-            salary: "Løn:",
-            from_date: "Fra dato:",
-            to_date: "Til dato:"
-        },
-
-        methods: {
-
-            /* For show employees */
-            birth_date: function (val) { return val.split("T")[0]; },
-            hire_date: function (val) { return val.split("T")[0]; },
-            edit_delete: function (val) {
-                return "<ul><li><input type=\"checkbox\"></li><li class=\"x\" title=\"Slet\">S</li><li class=\"e\" title=\"Ændre\">Æ</li></ul>";
-            },
-            gender: function (val) { return "<span class=\"" + val + "\">" + val + "</span>"; },
-            raw_gender: function (val) { return val.split(">")[1].split("<")[0];},
-            from_date: function (val) { return val.split("T")[0]; },
-            to_date: function (val) { return val.split("T")[0]; }
-        },
-
-        datetimes: {
-            from_date: true,
-            to_date: true,
-            hire_date: true,
-            birth_date: true
-        }
+    /* Used to change change input type - text to date */
+    datetimes: {
+        from_date: true,
+        to_date: true,
+        hire_date: true,
+        birth_date: true
     }
+}
 
 
-    /* Delete single row */
-    function deleteRow(table, elm) {
-        var row = $(elm).parents("div[class^='row']");
-        var columnElements = $(row).children("div[class!='edit_delete']");
-        var deleteQuery = "";
 
-        $.each(columnElements, function (index, elm) {
-            if ($(elm).html().indexOf("<") == -1) {
-                deleteQuery += (deleteQuery.length > 0 ? " AND " : "WHERE ")
-                    + "" + $(elm).attr("class") + "='" + $(elm).html().split(": ")[1] + "'";
-            }
+
+
+/* Insert the retrieved data */
+function insertData(query, designIdentifier, table) {
+    $.getJSON("/query?select=" + query, function (data) {
+        var rows = [];
+
+        $.each(data, function (rowNumber, rowValues) {
+            var rowElement = "";
+
+            /* If identifiers are specified - use these, otherwise use provided */
+            if (designObject[designIdentifier])
+                $.each(designObject[designIdentifier], function (identifier, value) {
+
+                    /* If a specific function is assigned for an identifier - use returned value */
+                    var rowDisplayValue = rowValues[identifier];
+                    if (designObject.methods[identifier])
+                        rowDisplayValue = designObject.methods[identifier](rowValues[identifier]);
+
+                    rowElement += "<div class=\"" + identifier + "\" title=\"" + rowValues[identifier] + "\">" + value + " " + rowDisplayValue + "</div>";
+                });
+            else
+                $.each(rowValues, function (identifier, value) {
+                    rowElement += "<div class=\"" + identifier + "\">" + identifier + " " + value + "</div>";
+                });
+
+            rows.push("<div class=\"row" + ((rows.length % 2) + 1) + "\">" + rowElement + "</div>");
         });
 
-        deleteQuery = "DELETE FROM " + table + " " + deleteQuery;
-        var deletionChoice = confirm(deleteQuery);
+        $("#contentData_" + designIdentifier).html(rows.join(""));
 
-        if (deletionChoice)
-            $.get("/query?query=" + deleteQuery, function (data) {
-                if (data == "Success")
-                    $(row).fadeOut(2000, function () { $(this).remove(); });
-                else
-                    alert("An error occured:\n" + data);
-            });
-    }
+        /* Assign deletion method */
+        $("#contentData_" + designIdentifier + " .x").click(function () {
+            deleteRow(table, this);
+        })
+        $("#contentData_" + designIdentifier + " .e").click(function () {
+            changeName(table, this);
+        })
+    });
+}
 
 
+/* Delete single row */
+function deleteRow(table, elm) {
+    var row = $(elm).parents("div[class^='row']");
+    var columnElements = $(row).children("div[class!='edit_delete']");
+    var deleteQuery = "";
 
-    function changeName(table, elm) {
+    $.each(columnElements, function (index, elm) {
+        if ($(elm).html().indexOf("<") == -1) {
+            deleteQuery += (deleteQuery.length > 0 ? " AND " : "WHERE ")
+                + "" + $(elm).attr("class") + "='" + $(elm).html().split(": ")[1] + "'";
+        }
+    });
 
-        var row = $(elm).parents("div[class^='row']");
-        var columnElements = $(row).children("div[class!='edit_delete']");
-        var changeQuery = "";
+    deleteQuery = "DELETE FROM " + table + " " + deleteQuery;
+    var deletionChoice = confirm(deleteQuery);
 
-        /* Do not allow changes on primary keys */
-        /* TODO: Consider looking at all items with foreign keys also */
-        var keyQuery = "SELECT column_name " +
-            "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE " +
-            "WHERE table_schema = 'employees' AND table_name = '" + table + "' AND constraint_name = 'PRIMARY'";
-        
-        $.getJSON("/query?select=" + encodeURIComponent(keyQuery), function (data) {
-            var excludedFromChange = [];
+    if (deletionChoice)
+        $.get("/query?query=" + deleteQuery, function (data) {
+            if (data == "Success")
+                $(row).fadeOut(2000, function () { $(this).remove(); });
+            else
+                alert("An error occured:\n" + data);
+        });
+}
+
+
+/* Change the values within a row */
+function changeName(table, elm) {
+
+    var row = $(elm).parents("div[class^='row']");
+    var columnElements = $(row).children("div[class!='edit_delete']");
+    var changeQuery = "";
+
+    /* Do not allow changes on primary keys */
+    /* TODO: Consider looking at all items with foreign keys also */
+    var keyQuery = "SELECT column_name " +
+        "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE " +
+        "WHERE table_schema = 'employees' AND table_name = '" + table + "' AND constraint_name = 'PRIMARY'";
+
+    $.getJSON("/query?select=" + encodeURIComponent(keyQuery), function (data) {
+        var excludedFromChange = [];
+        var updateQuery = "";
+
+        $.each(data, function (rowNumber, primaryColumns) {
+            excludedFromChange.push(primaryColumns["column_name"]);
+        });
+
+        $.each(columnElements, function (elmNumber, columnElm) {
+            var columnName = $(columnElm).attr("class");
+
+            /* De-convert the values from the database */
+            var rawValue = $(columnElm).html().split(": ");
+            if (designObject.methods["raw_" + columnName])
+                rawValue[1] = designObject.methods["raw_" + columnName](rawValue[1]);
+
+            if (!excludedFromChange.includes(columnName)) {
+                var dataType = designObject.datetimes[columnName] ? "date" : "text";
+                rawValue[1] = "<input type=\"" + dataType + "\" class=\"editable\" value=\"" + rawValue[1] + "\">";
+            } else {
+                updateQuery += (updateQuery.length > 0 ? " AND " : "WHERE ") +
+                    columnName + "='" + rawValue[1] + "'";
+            }
+            $(columnElm).html(rawValue.join(": "));
+        });
+
+        /* Update the values in the database */
+        var update = $("<div></div>");
+        update.text("UPDATE");
+        update.attr("class", "update");
+        update.click(function () {
+
             var updateQuery = "";
+            var identifyQuery = "";
 
-            $.each(data, function (rowNumber, primaryColumns) {
-                excludedFromChange.push(primaryColumns["column_name"]);
-            });
-            
             $.each(columnElements, function (elmNumber, columnElm) {
                 var columnName = $(columnElm).attr("class");
 
-                /* De-convert the values from the database */
-                var rawValue = $(columnElm).html().split(": ");
-                if (designColumns["methods"]["raw_" + columnName])
-                    rawValue[1] = designColumns["methods"]["raw_" + columnName](rawValue[1]);
-
                 if (!excludedFromChange.includes(columnName)) {
-                    var dataType = designColumns["datetimes"][columnName] ? "date" : "text";
-                    rawValue[1] = "<input type=\"" + dataType + "\" class=\"editable\" value=\"" + rawValue[1] + "\">";
-                } else {
-                    updateQuery += (updateQuery.length > 0 ? " AND " : "WHERE ") +
-                        columnName + "='" + rawValue[1] + "'";
-                }
-                $(columnElm).html(rawValue.join(": "));
-            });
-
-            /* Update the values in the database */
-            var update = $("<div></div>");
-            update.text("UPDATE");
-            update.attr("class", "update");
-            update.click(function () {
-
-                var updateQuery = "";
-                var identifyQuery = "";
-
-                $.each(columnElements, function (elmNumber, columnElm) {
-                    var columnName = $(columnElm).attr("class");
-
-                    if (!excludedFromChange.includes(columnName)) {
-                        var rawValueElm = $(columnElm).children("input");
-                        if (rawValueElm.val() != undefined) {
-                            var newRawValue = rawValueElm.val();
-                            updateQuery += (updateQuery.length > 0 ? ", " : "") +
-                                columnName + "='" + newRawValue + "'";
-                        }
-                    } else {
-                        identifyQuery += (identifyQuery.length > 0 ? " AND " : "") +
-                            columnName + "='" + $(columnElm).html().split(": ")[1] + "'";
+                    var rawValueElm = $(columnElm).children("input");
+                    if (rawValueElm.val() != undefined) {
+                        var newRawValue = rawValueElm.val();
+                        updateQuery += (updateQuery.length > 0 ? ", " : "") +
+                            columnName + "='" + newRawValue + "'";
                     }
-                });
-
-                updateQuery = "UPDATE " + table + " SET " + updateQuery + " WHERE " + identifyQuery;
-                alert(updateQuery);
-                $.get("/query?query=" + updateQuery);
-                $(row).remove();
+                } else {
+                    identifyQuery += (identifyQuery.length > 0 ? " AND " : "") +
+                        columnName + "='" + $(columnElm).html().split(": ")[1] + "'";
+                }
             });
 
-            $(row).children("div[class='edit_delete']").append(update);
-
+            updateQuery = "UPDATE " + table + " SET " + updateQuery + " WHERE " + identifyQuery;
+            alert(updateQuery);
+            $.get("/query?query=" + updateQuery);
+            $(row).remove();
         });
-    }
 
+        $(row).children("div[class='edit_delete']").append(update);
 
-    /* Insert the retrieved data */
-    function insertData(query, designIdentifier, table) {
-        $.getJSON("/query?select=" + query, function (data) {
-            var rows = [];
-
-            $.each(data, function (rowNumber, rowValues) {
-                var rowElement = "";
-
-                /* If identifiers are specified - use these, otherwise use provided */
-                if (designColumns[designIdentifier])
-                    $.each(designColumns[designIdentifier], function (identifier, value) {
-
-                        /* If a specific function is assigned for an identifier - use returned value */
-                        var rowDisplayValue = rowValues[identifier];
-                        if (designColumns["methods"][identifier])
-                            rowDisplayValue = designColumns["methods"][identifier](rowValues[identifier]);
-
-                        rowElement += "<div class=\"" + identifier + "\" title=\"" + rowValues[identifier] + "\">" + value + " " + rowDisplayValue + "</div>";
-                    });
-                else
-                    $.each(rowValues, function (identifier, value) {
-                        rowElement += "<div class=\"" + identifier + "\">" + identifier + " " + value + "</div>";
-                    });
-
-                rows.push("<div class=\"row" + ((rows.length % 2) + 1) + "\">" + rowElement + "</div>");
-            });
-
-            $("#contentData_" + designIdentifier).html(rows.join(""));
-
-            /* Assign deletion method */
-            $("#contentData_" + designIdentifier + " .x").click(function () {
-                deleteRow(table, this);
-            })
-            $("#contentData_" + designIdentifier + " .e").click(function () {
-                changeName(table, this);
-            })
-        });
-    }
-
-
-
-    /* Show all employees example with input fields for string manipulation and example view */
-    function toggleShow(elmVisible, query, table, elmHref = elmVisible) {
-        $("#content_show > div[class!='limiter']").css("display", "none");
-        $("#content_" + elmVisible).css("display", "block");
-
-        $("#content_show > ul > li").attr("class", "");
-        $("li[href='?" + elmHref + "']").attr("class", "selected");
-        insertData(query, elmVisible, table);
-    }
-
-    /* Show all employees */
-    $("li[href='?show']").click(function (e) {
-        var query = encodeURIComponent("SELECT * FROM employees LIMIT 10");
-        toggleShow("showEmployees", query, "employees", "show");
     });
-
-    /* Show all departments */
-    $("li[href='?showDepartments']").click(function (e) {
-        var query = encodeURIComponent("SELECT * FROM departments");
-        toggleShow("showDepartments", query, "departments");
-    });
-
-    /* Show manager of departments */
-    $("li[href='?showDeptManager']").click(function (e) {
-        var query = encodeURIComponent("SELECT * FROM dept_manager");
-        toggleShow("showDeptManager", query, "dept_manager");
-    });
-
-    /* Show titles */
-    $("li[href='?showTitles']").click(function (e) {
-        var query = encodeURIComponent("SELECT * FROM titles LIMIT 10");
-        toggleShow("showTitles", query, "titles");
-    });
-
-    /* Show department employees */
-    $("li[href='?showDeptEmp']").click(function (e) {
-        var query = encodeURIComponent("SELECT * FROM dept_emp LIMIT 10");
-        toggleShow("showDeptEmp", query, "dept_emp");
-    });
-
-    /* Show salaries */
-    $("li[href='?showSalaries']").click(function (e) {
-        var query = encodeURIComponent("SELECT * FROM salaries LIMIT 10");
-        toggleShow("showSalaries", query, "salaries");
-    });
-});
+}
