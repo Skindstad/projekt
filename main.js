@@ -157,7 +157,7 @@ $(document).ready(function () {
                 var restrict = "SELECT * FROM salaries WHERE emp_no = " + emp_no + " AND from_date = '" + from + "';";
                 $.getJSON("/query?select=" + encodeURIComponent(restrict), function (data) {
                     alert(restrict);
-                    $.each(data, function (key2 ,val) {
+                /*    $.each(data, function (key2 ,val) {
                         alert("i come here in!!!" + val["emp_no"] + "," + val["from_date"])
                         newR = new Option(val["emp_no"], val["from_date"]);
                         select.append(newR);
