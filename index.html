@@ -40,7 +40,7 @@
                         <option value="titles">Titles</option>
                     </select><br>
                     <div id="new_employees">
-                        Insert new employee<br>
+                        <h3 class="h_move"><b>Insert new Employee</b></h3><br>
                         <table>
                                 <tr>
                                 <th></th>
@@ -50,27 +50,27 @@
                                 <th><label>Gender:</label></th>
                                 <th><label>Hire:</label></th></tr>
                                 <tr>
-                        <td><input class="w3-input w3-border w3-animate-input" type="hidden" name="emp_no" placeholder="Emp number"></td>
-                        <td><input class="w3-input w3-border w3-animate-input" type="date" name="birth" id="date" placeholder="birthday"></td>
-                        <td><input class="w3-input w3-border w3-animate-input" type="text" name="first" placeholder="Firstname"></td>
-                        <td><input class="w3-input w3-border w3-animate-input" type="text" name="last" placeholder="Lastname"></td>
+                        <td><input class="w3-input w3-border w30" type="hidden" name="emp_no" placeholder="Emp number"></td>
+                        <td><input class="w3-input w3-border w30" type="date" name="birth" id="date" placeholder="birthday"></td>
+                        <td><input class="w3-input w3-border w30" type="text" name="first" placeholder="Firstname"></td>
+                        <td><input class="w3-input w3-border w30" type="text" name="last" placeholder="Lastname"></td>
                         <td><input class="w3-radio" type="radio" name="gender" value="M" checked> Male
                         <input class="w3-radio" type="radio" name="gender" value="F"> Female</td>
-                        <td><input class="w3-input w3-border w3-animate-input w60" type="date" id="date" name="hire" placeholder="Hire date"></td>
+                        <td><input class="w3-input w3-border w30" type="date" id="date" name="hire" placeholder="Hire date"></td>
                         </tr>
                     </table>
                     </div>
 
                     <div id="new_departments">
-                        Insert new Departments<br><br>
+                            <h3 class="h_move"><b>Insert new Departments</b></h3><br>
 
-                        <table>
+                        <table class="departments">
                                 <tr>
                                     <th><label>Department number:</label></th>
                                     <th><label>Departmant Name:</label></th></tr>
                                     <tr>
-                        <td><input class="w3-input w3-border w3-animate-input" type="number" name="dept_no" placeholder="Dept number" min="001" max="999"></td>
-                        <td><input class="w3-input w3-border w3-animate-input" type="text" name="dept_N" placeholder="Department name"></td>
+                        <td><input class="w3-input w3-border w30" type="number" name="dept_no" placeholder="Dept number" min="001" max="999"></td>
+                        <td><input class="w3-input w3-border w30" type="text" name="dept_N" placeholder="Department name"></td>
                     </tr>
                     </table>
                     </div>
@@ -78,60 +78,61 @@
                     <div id="new_dept">
 
                         <div id="new_dept_emp" class="toggleInp">
-                            Insert new Dept_emp<br><br>
+                            <h3 class="h_move"><b>Insert new Dept_emp</b></h3><br>
                         </div>
                         <div id="new_dept_manager" class="toggleInp">
-                            Insert new Dept_manager<br><br>
+                            <h3 class="h_move"><b>Insert new Dept_manager</b></h3><br>
                         </div>
-                        <table>
+                        <table class="move_t">
                                 <tr>
                                     <th><label>Employees Number:</label></th>
                                     <th><label>Department number:</label></th>
                                     <th><label>From:</label></th>
                                     <th><label>To:</label></th></tr>
                                     <tr>
-                        <td><input class="w3-input w3-border w3-animate-input" type="number" name="emp_n" placeholder="Emp number"></td>
-                        <td><select class="w3-input w3-border" name="dept_number" id="dept_no"></select></td>
-                        <td><input class="w3-input w3-border w3-animate-input" type="date" id="date" name="form_d" placeholder="From date"></td>
-                        <td><input class="w3-input w3-border w3-animate-input" type="text" onfocus="(this.type='date')" name="to_d" placeholder="01-01-9999"></td>
+                        <td><input class="w3-input w3-border w30" type="number" name="emp_n" placeholder="Emp number"></td>
+                        <td><select class="w3-input w3-border w60" name="dept_number" id="dept_no"></select></td>
+                        <td><input class="w3-input w3-border w30" type="date" id="date" name="form_d" placeholder="From date"></td>
+                        <td><input class="w3-input w3-border w30" type="text" onfocus="(this.type='date')" name="to_d" placeholder="01-01-9999"></td>
                       </tr>  
                       </table>  
                     </div>
 
                     <div id="new_salaries">
-                        Insert new Salaries<br><br>
-                        <table>
+                            <h3 class="h_move"><b>Insert new Salaries</b></h3><br>
+                        <table class="move_t">
                                 <tr>
                                     <th><label>Employees Number:</label></th>
                                     <th><label>Salary:</label></th>
                                     <th><label>From:</label></th>
                                     <th><label>To:</label></th></tr>
                                     <tr>
-                        <td><input class="w3-input w3-border w3-animate-input" type="number" name="emp" placeholder="Emp number"></td>
-                        <td><input class="w3-input w3-border w3-animate-input" type="number" name="salar" placeholder="Salary"></td>
-                        <td><input class="w3-input w3-border w3-animate-input" type="date" id="date" name="from" placeholder="From date"></td>
-                        <td><input class="w3-input w3-border w3-animate-input" type="text" onfocus="(this.type='date')" name="to" placeholder="01-01-9999"></td>
+                        <td><input class="w3-input w3-border w30" type="number" name="emp" placeholder="Emp number"></td>
+                        <td><input class="w3-input w3-border w30" type="number" name="salar" placeholder="Salary"></td>
+                        <td><input class="w3-input w3-border w30" type="date" id="date" name="from" placeholder="From date"></td>
+                        <td><input class="w3-input w3-border w30" type="text" onfocus="(this.type='date')" name="to" placeholder="01-01-9999"></td>
                         </tr>
                         </table>
                     </div>
 
                     <div id="new_titles">
-                        Insert new Titles<br><br>
-                        <table>
+                            <h3 class="h_move"><b>Insert new Titles</b></h3><br>
+                        <table class="move_t">
                                 <tr>
                                     <th><label>Employees Number:</label></th>
                                     <th><label>Title:</label></th>
                                     <th><label>From:</label></th>
                                     <th><label>To:</label></th></tr>
                                     <tr>
-                        <td><input class="w3-input w3-border w3-animate-input" type="number" name="emp_nu" placeholder="Emp number"></td>
-                        <td><input class="w3-input w3-border w3-animate-input" type="text" name="title" placeholder="Title"></td>
-                        <td><input class="w3-input w3-border w3-animate-input" type="date" id="date" name="from_date" placeholder="From date"></td>
-                        <td><input class="w3-input w3-border w3-animate-input" type="text" onfocus="(this.type='date')" name="to_date" placeholder="01-01-9999"></td>
+                        <td><input class="w3-input w3-border w30" type="number" name="emp_nu" placeholder="Emp number"></td>
+                        <td><input class="w3-input w3-border w30" type="text" name="title" placeholder="Title"></td>
+                        <td><input class="w3-input w3-border w30" type="date" id="date" name="from_date" placeholder="From date"></td>
+                        <td><input class="w3-input w3-border w30" type="text" onfocus="(this.type='date')" name="to_date" placeholder="01-01-9999"></td>
                         </tr>
                         </table>
                     </div>
-                    <button class="w3-btn w3-ripple" type="submit" name="emp" id="emp">submit</button>
+                    <br>
+                    <button class="w3-btn w3-ripple" type="submit" name="emp" id="emp">Submit</button>
                 </form>
             </div>
 
