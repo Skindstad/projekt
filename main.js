@@ -376,7 +376,7 @@ function insertData(query, designIdentifier, table) {
             var lastQuery = unescape(query).split("LIMIT ")[0];
             var amount = parseInt(unescape(query).split("LIMIT ")[1].split(" ")[0]);
             var offset = parseInt(unescape(query).split("OFFSET ")[1] ? unescape(query).split("OFFSET ")[1] : 0);
-            var toTarget = parseInt(offset) - 1 + parseInt(amount);
+            var toTarget = parseInt(offset) + parseInt(amount);
 
             $(".limiter").html("");
 
