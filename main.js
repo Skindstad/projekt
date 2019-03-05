@@ -187,8 +187,6 @@ $(document).ready(function () {
                     $.each(data, function (key2, val) {
                         newR = 1;
                     });
-
-
                     if (newR != 0) {
                         alert("The same person can not get salaries two times the same day");
                     } else {
