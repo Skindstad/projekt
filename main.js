@@ -312,12 +312,12 @@ var designObject = {
     },
 
     liHrefs: {
-        showEmployees: "SELECT * FROM employees LIMIT 10, employees",
-        showDepartments: "SELECT * FROM departments LIMIT 10, departments",
-        showDeptManager: "SELECT * FROM dept_manager LIMIT 10, dept_manager",
-        showTitles: "SELECT * FROM titles LIMIT 10, titles",
-        showDeptEmp: "SELECT * FROM dept_emp LIMIT 10, dept_emp",
-        showSalaries: "SELECT * FROM salaries LIMIT 10, salaries"
+        showEmployees: "SELECT * FROM employees LIMIT 50, employees",
+        showDepartments: "SELECT * FROM departments LIMIT 50, departments",
+        showDeptManager: "SELECT * FROM dept_manager LIMIT 50, dept_manager",
+        showTitles: "SELECT * FROM titles LIMIT 50, titles",
+        showDeptEmp: "SELECT * FROM dept_emp LIMIT 50, dept_emp",
+        showSalaries: "SELECT * FROM salaries LIMIT 50, salaries"
     },
 
     /* Order of columns and visible columns */
@@ -365,28 +365,72 @@ var designObject = {
     }
 }
 
-
-
-
-
 /* Insert the retrieved data */
 function insertData(query, designIdentifier, table) {
 
     var count = "SELECT COUNT(*) AS \"Total\" FROM " + table;
     $.getJSON("/query?select=" + encodeURIComponent(count), function (data) {
-        var total = data[0]["Total"];
 
-
-
-
+        var total = parseInt(data[0]["Total"]);
+        
         $.getJSON("/query?select=" + query, function (data) {
 
-            var amount = unescape(query).split("LIMIT ")[1].split(" ")[0];
-            var offset = unescape(query).split("OFFSET ")[1] ? unescape(query).split("OFFSET ")[1] : 1;
+            var lastQuery = unescape(query).split("LIMIT ")[0];
+            var amount = parseInt(unescape(query).split("LIMIT ")[1].split(" ")[0]);
+            var offset = parseInt(unescape(query).split("OFFSET ")[1] ? unescape(query).split("OFFSET ")[1] : 0);
             var toTarget = parseInt(offset) - 1 + parseInt(amount);
 
+            $(".limiter").html("");
 
-            $(".limiter").html("Showing: " + offset + " to " + (toTarget > total ? total : toTarget ) + " out of " + total);
+            /* Previous page */
+            if (offset > 1) {
+                var prevOffset = (offset - amount) < 0 ? 0 : (offset - amount);
+                var prevPage = $("<div></div>").text("Previous page");
+                prevPage.click(function () {
+                    var query = lastQuery + "LIMIT " + amount + " OFFSET " + prevOffset;
+                    toggleShow(designObject.lastToggleShow.elmVisible, query, table);
+                });
+                prevPage.attr("class", "queryNav");
+                $(".limiter").append(prevPage);
+            } else {
+                var prevPage = $("<div></div>").text("Previous page");
+                prevPage.attr("class", "queryNavDeactive");
+                $(".limiter").append(prevPage);
+            }
+
+            
+            var currentShown = $("<div></div>").text("Showing: " + (offset+1) + " to " + (toTarget > total ? total : toTarget) + " out of " + total + " - Shown each page: ");
+            $(".limiter").append(currentShown);
+
+            /* Change limit */
+            var amountChange = $("<input>").val(amount);
+            amountChange.attr("class", "amountChange");
+            $(currentShown).append(amountChange);
+
+            var amountChangeOk = $("<div></div>").text("Change");
+            amountChangeOk.attr("class", "amountChangeOk");
+            amountChangeOk.click(function () {
+                var query = lastQuery + "LIMIT " + $(".amountChange").first().val() + " OFFSET " + offset;
+                toggleShow(designObject.lastToggleShow.elmVisible, query, table);
+            });
+            $(currentShown).append(amountChangeOk);
+
+            /* Next page */
+            if ((offset+amount) < total) {
+                var nextOffset = offset + amount;
+                var nextPage = $("<div></div>").text("Next page");
+                nextPage.click(function () {
+                    var query = lastQuery + "LIMIT " + amount + " OFFSET " + nextOffset;
+                    toggleShow(designObject.lastToggleShow.elmVisible, query, table);
+                });
+                nextPage.attr("class", "queryNav");
+                $(".limiter").append(nextPage);
+            } else {
+                var nextPage = $("<div></div>").text("Next page");
+                nextPage.attr("class", "queryNavDeactive");
+                $(".limiter").append(nextPage);
+            }
+
 
             var rows = [];
 

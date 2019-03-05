@@ -246,3 +246,51 @@ input.editable {
 .update:hover {
     background: #0a0;
 }
+
+.limiter{
+    display: grid;
+    grid-template-columns: 20% auto 20%;
+}
+
+.limiter > div {    
+    margin:8px;
+}
+
+.queryNav, .queryNavDeactive {
+    background:#fff;
+    border-radius:8px;
+    text-align: center;
+}
+
+.queryNav {
+    color: #000;
+}
+
+.queryNav:hover {
+    color:#fff;
+    background: #000;
+    cursor: pointer;
+}
+
+.queryNavDeactive{
+    color: #aaa;
+}
+
+.amountChange {
+    margin-left:10px;
+    width:100px;
+}
+
+.amountChangeOk {
+    margin-left:10px;
+    display:inline-block;
+    cursor:pointer;
+    background: #9f9;
+    padding: 2px 8px;
+    border:1px solid #000;
+    border-radius: 8px;
+}
+
+.amountChangeOk:hover {
+    background: #5a5;
+}
