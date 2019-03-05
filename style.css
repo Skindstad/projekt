@@ -69,16 +69,19 @@ ul#sidebar > li.header:hover {
 
 form{
     width: auto;
-    margin-left: 2%;
-    margin-right: auto;
-    border: black 1px solid;
-    border-radius: 5px;
 }
 .emp{
-    width: 300px;
+    width: auto;
 }
+.w60{
+    width: 300px!important;
+}
+
+td, th{
+    padding-right: 15px !important;
+}
+
 input, select{
-    
     margin-top: 1%;
     height: auto;
     width: auto;
@@ -87,23 +90,33 @@ input, select{
 }
 button{
     display: block!important;
-    height: auto;
-    width: 100px;
+    height: 40px;
+    width: 120px;
     margin: 0 auto!important;
-    font-size: 20px;
-    border-radius: 2px;
-    background-color: green;
+    font-size: 20px !important;
+    border-radius: 20px;
+    background-color: yellowgreen !important;
 }
 button:hover {
-    background-color: red;
+    background-color: red !important;
     color: white;
 }
 table{
     width: max-content;
 }
-
-
-
+.w30{
+width: 60%;
+}
+.h_move{
+    margin-left: 40%;
+    margin-right: 30%;
+}
+.departments{
+    margin-left: 35%;
+}
+.move_t{
+    margin-left: 7%;
+}
 
 
 
