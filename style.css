@@ -101,6 +101,11 @@ button:hover {
     background-color: red !important;
     color: white;
 }
+.text{
+    text-align: center !important;
+    padding-top: 5px !important;
+    padding-bottom: 2% !important;
+}
 table{
     width: max-content;
 }
