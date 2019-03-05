@@ -440,6 +440,7 @@ function insertData(query, designIdentifier, table) {
 
             var rows = [];
 
+            /* Data insertion */
             $.each(data, function (rowNumber, rowValues) {
                 var rowElement = "";
 
@@ -462,12 +463,29 @@ function insertData(query, designIdentifier, table) {
             $("#contentData_" + designIdentifier + " .x").click(function () {
                 deleteRow(table, this);
             })
+
+            /* Assign update method */
             $("#contentData_" + designIdentifier + " .e").click(function () {
                 changeName(table, this);
             })
+
+            /* Assign show department data */
+            /*$(".dept_name").click(function () {
+                showDepartment($(this).parent().children(".dept_no").first().html().split(": ")[1]);
+            })*/
         });
 
     });
+}
+
+/* TODO */
+function showDepartment(deptNr) {
+    //alert(deptNr);
+    /*
+     * CREATE VIEW dept_employee_list AS
+SELECT employees.emp_no, first_name, last_name, birth_date, gender, hire_date, dept_emp.dept_no, dept_name, from_date, to_date FROM employees
+INNER JOIN dept_emp ON dept_emp.emp_no = employees.emp_no
+INNER JOIN departments ON dept_emp.dept_no = departments.dept_no*/
 }
 
 
