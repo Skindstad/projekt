@@ -403,6 +403,14 @@ function insertData(query, designIdentifier, table) {
             /* Change limit */
             var amountChange = $("<input>").val(amount);
             amountChange.attr("class", "amountChange");
+            amountChange.attr("type", "number")
+            amountChange.keyup(function () {
+                
+                if (parseInt(this.value) > 1000) {
+                    this.value = 1000;
+                    alert("Max amount is 1000 records each page");
+                }
+            });
             $(currentShown).append(amountChange);
 
             var amountChangeOk = $("<div></div>").text("Change");
