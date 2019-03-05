@@ -195,15 +195,15 @@ width: 60%;
 
 
 #content_showEmployees .row1, #content_showEmployees .row2 {
-    grid-template-columns: 8% 18% 15% 15% 10% 17% auto;
+    grid-template-columns: 8% 18% 18% 18% 7% 15% auto;
 }
 
 #content_showDepartments .row1, #content_showDepartments .row2 {
-    grid-template-columns: 8% 13% auto;
+    grid-template-columns: 8% 20% auto;
 }
 
 #content_showDeptManager .row1, #content_showDeptManager .row2 {
-    grid-template-columns: 8% 18% 13% 17% auto;
+    grid-template-columns: 8% 22% 20% 17% auto;
 }
 
 #content_showTitles .row1, #content_showTitles .row2 {
@@ -211,11 +211,11 @@ width: 60%;
 }
 
 #content_showDeptEmp .row1, #content_showDeptEmp .row2 {
-    grid-template-columns: 8% 18% 13% 17% auto;
+    grid-template-columns: 8% 19% 18% 17% auto;
 }
 
 #content_showSalaries .row1, #content_showSalaries .row2 {
-    grid-template-columns: 8% 18% 13% 17% auto;
+    grid-template-columns: 8% 20% 15% 17% auto;
 }
 
 #content_show > div ul {
